@@ -5,6 +5,7 @@ const router = express.Router();
 module.exports = router;
 const mongoose = require("mongoose");
 const mongoString = process.env.DATABASE_URL;
+const bodyParser = require('body-parser');
 
 const routes = require('./routes/routes')
 
@@ -20,16 +21,18 @@ database.on('error', (error) => {
 });
 
 database.once('connected', () => {
-  console.log('Database Connected')
+  console.log('Fitness Database Connected')
 });
 
 
 
 const app = express();
 app.set('view engine', 'ejs');
-// app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
+// app.use(express.json())
 app.use('/api', routes)
+
 
 
 

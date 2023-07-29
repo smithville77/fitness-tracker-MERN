@@ -1,4 +1,6 @@
 const express = require('express');
+const User = require('../models/userModel');
+
 
 const router = express.Router()
 
@@ -7,7 +9,24 @@ const router = express.Router()
 
 //Post Method
 router.post('/post', (req, res) => {
-  res.send('Post API')
+  const { username, email, password, dateOfBirth, height, weight } = req.body;
+
+  // Create a new user instance based on the User schema
+  const user = new User({
+    username: username,
+    email,
+    password,
+    dateOfBirth,
+    height,
+    weight
+  });
+  user.save((error) => {
+    if (!error) {
+      console.log("User successfully created", user)
+    } else {
+      console.log(error)
+    }
+  })
 })
 
 //Get all Method
