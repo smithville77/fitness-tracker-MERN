@@ -7,8 +7,8 @@ const mongoose = require("mongoose");
 const mongoString = process.env.DATABASE_URL;
 const bodyParser = require('body-parser');
 
-const routes = require('./routes/routes')
-
+const userRoutes = require('./routes/userRoutes')
+//const exerciseRoutes = require('./routes/exerciseRoutes')
 
 mongoose.connect(mongoString, { 
   useNewUrlParser: true,
@@ -30,8 +30,12 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-// app.use(express.json())
-app.use('/api', routes)
+app.use(express.json())
+
+
+app.use('/users', userRoutes);
+//set this up after userRoutes are created
+// app.use('/exercise', exerciseRoutes);
 
 
 
