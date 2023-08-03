@@ -26,3 +26,72 @@ exports.createUser = (req, res) => {
   });
 };
 
+
+//get user by username // usernames should be unique
+exports.getUser = (req, res) => {
+  const username = req.params.username;
+  console.log("requested name: " + username)
+  
+  User.findOne({ username })
+  
+  .then((user) => {
+    console.log("user found: " + username)
+    if(!user) {
+      return res.status(404).json({error: "User not found"})
+    }
+    res.json(user)
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).json({error: "Failed to get user"})
+  })
+}
+
+// get user by ID
+exports.getUserByID = (req, res) => {
+  const userID = req.params.id;
+  console.log("requested name: " + userID);
+  
+  User.findById(userID)
+    .then((user) => {
+      
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      console.log("user found: " + user.username);
+      res.json(user);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ error: "Failed to get user" });
+    });
+};
+
+
+
+
+// exports.getUserByID = (req, res) => {
+//   const userID = req.params.id;
+//   console.log("Requested user ID:", userID);
+
+//   // Remove 'objectId(' and ')' from the ID to extract the hexadecimal string
+//   const hexStringID = userID.replace(/objectId\(|\)/g, '');
+
+//   // Convert the hexadecimal string to an ObjectId
+//   const mongooseID = mongoose.Types.ObjectId(hexStringID);
+
+//   User.findById(mongooseID)
+//     .then((user) => {
+//       if (!user) {
+//         console.log("User not found");
+//         return res.status(404).json({ error: "User not found" });
+//       }
+//       console.log("Found user:", user.username);
+//       res.json(user);
+//     })
+//     .catch((error) => {
+//       console.log("Error:", error);
+//       res.status(500).json({ error: "Failed to get user" });
+//     });
+// };
+

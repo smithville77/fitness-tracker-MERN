@@ -5,17 +5,14 @@ const UserController = require('../controllers/userController.js');
 
 
 
-
-
-
-
 //Post Method
 router.post('/newuser', UserController.createUser)
 
-// //Get by ID Method
-// router.get('/getOne/:id', (req, res) => {
-//   res.send('Get by ID API')
-// })
+// //Get by username Method
+router.get('/getuser/:username', UserController.getUser)
+
+// Get user by ID method;
+router.get('/getuserID/:id', UserController.getUserByID)
 
 // //Update by ID Method
 // router.patch('/update/:id', (req, res) => {
