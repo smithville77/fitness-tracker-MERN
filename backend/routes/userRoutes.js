@@ -14,6 +14,10 @@ router.get('/getuser/:username', UserController.getUser)
 // Get user by ID method;
 router.get('/getuserID/:id', UserController.getUserByID)
 
+
+// user login route 
+router.post('/login', UserController.userLogin)
+
 // //Update by ID Method
 // router.patch('/update/:id', (req, res) => {
 //   res.send('Update by ID API')

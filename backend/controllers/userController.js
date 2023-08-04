@@ -1,5 +1,7 @@
+require('dotenv').config();
 const User = require("../models/user")
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
 
 exports.createUser = (req, res) => {
   const { username, email, password, dateOfBirth, height, weight } = req.body;
@@ -71,5 +73,36 @@ exports.getUserByID = (req, res) => {
 
 // login route
 exports.userLogin = (req, res) => {
+  const { email, password } = req.body;
 
+  User.findOne({ email })
+  .then((user) => {
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found"})
+    } 
+    
+    bcrypt.compare(password, user.password, (err, passwordMatch) => {
+      if(err) {
+        console.log(err)
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      if(!passwordMatch) {
+        return res.status(401).json({ error: "Invalid credentials" })
+      }
+
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_KEY, {
+          expiresIn: '1h' 
+          });
+
+          // Send the token to the client
+          res.json({ token });
+        });
+      })
+      .catch((error) => {
+        console.error('Error finding user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      });
+    
 }
