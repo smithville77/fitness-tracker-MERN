@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
   userId: {
@@ -44,6 +45,10 @@ const userSchema = new mongoose.Schema({
   }
 })
 
+//use bcrypt to salt and hash password
+// userSchema.virtual('plainPassword').set(function(password) {
+//   this.password = bcrypt.hashSync(password, 10)
+// })
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+
+module.exports  = mongoose.model('User', userSchema);

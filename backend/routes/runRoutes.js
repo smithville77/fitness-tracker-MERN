@@ -6,4 +6,4 @@ const RunController = require("../controllers/runController");
 router.post("/newrun", RunController.createRun);
 
 
-module.exports(router)
+module.exports = router;

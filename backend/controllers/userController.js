@@ -1,14 +1,14 @@
 const User = require("../models/user")
-
+const bcrypt = require('bcrypt')
 
 exports.createUser = (req, res) => {
   const { username, email, password, dateOfBirth, height, weight } = req.body;
-
+  const hashedPassword = bcrypt.hashSync(password, 10);
   // Create a new user instance based on the User schema
   const user = new User({
     username,
     email,
-    password,
+    password: hashedPassword,
     dateOfBirth,
     height,
     weight
@@ -69,3 +69,7 @@ exports.getUserByID = (req, res) => {
 
 
 
+// login route
+exports.userLogin = (req, res) => {
+
+}

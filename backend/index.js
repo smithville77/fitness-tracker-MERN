@@ -7,6 +7,14 @@ const mongoose = require("mongoose");
 const mongoString = process.env.DATABASE_URL;
 const bodyParser = require('body-parser');
 
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+// const salt = 10;
+
+// bcrypt.genSalt(10, (error, salt) => {
+
+// })
+
 const userRoutes = require('./routes/userRoutes')
 const runRoutes = require('./routes/runRoutes')
 
