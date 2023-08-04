@@ -2,9 +2,9 @@ const Run = require('../models/runDetails');
 
 
 exports.createRun = (req, res) => {
-  const userID = req.user._id;
+  const userID = req.user.userId;
   const { distance, duration } = req.body;
-
+  
   const run = new Run({
     distance,
     duration,
