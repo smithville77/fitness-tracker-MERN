@@ -4,9 +4,10 @@ const runSchema = new Schema({
   
     distance: Number,
     duration: Number,
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
+      required: true
     }
   ,
 

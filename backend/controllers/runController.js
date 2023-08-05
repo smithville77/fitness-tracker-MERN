@@ -2,7 +2,8 @@ const Run = require('../models/runDetails');
 
 
 exports.createRun = (req, res) => {
-  const userID = req.userId;
+  console.log(req.user)
+  const userID = req.user.userId;
   const { distance, duration } = req.body;
   
   const run = new Run({
