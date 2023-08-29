@@ -6,6 +6,7 @@ module.exports = router;
 const mongoose = require("mongoose");
 const mongoString = process.env.DATABASE_URL;
 const bodyParser = require('body-parser');
+const cors = require("cors");
 
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
@@ -35,6 +36,7 @@ database.once('connected', () => {
 
 
 const app = express();
+app.use(cors());
 app.set('view engine', 'ejs');
 
 app.use(express.static("public"));
