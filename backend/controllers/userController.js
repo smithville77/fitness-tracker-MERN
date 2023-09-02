@@ -73,9 +73,9 @@ exports.getUserByID = (req, res) => {
 
 // login route
 exports.userLogin = (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  User.findOne({ email })
+  User.findOne({ username })
   .then((user) => {
 
     if (!user) {
@@ -98,6 +98,7 @@ exports.userLogin = (req, res) => {
 
           // Send the token to the client
           res.json({ token });
+          
         });
       })
       .catch((error) => {
