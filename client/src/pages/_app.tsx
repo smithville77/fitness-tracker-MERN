@@ -2,12 +2,6 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 
 
-// export default function App({ Component, pageProps }: AppProps) {
-//   return <Component {...pageProps} />
-// }
-
-// pages/_app.js
-// pages/_app.js
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../components/UseAuth'; // Import the useAuth hook
@@ -19,10 +13,12 @@ function MyApp({ Component, pageProps }) {
 
   // Redirect to the login page if not authenticated
   useEffect(() => {
-    if (!authenticated && router.pathname !== '/login') {
+    const currentPath = router.pathname;
+    if (!authenticated && currentPath !== '/login') {
       router.push('/login');
     }
   }, [authenticated, router]);
+  
 
   return <Component {...pageProps} />;
 }
