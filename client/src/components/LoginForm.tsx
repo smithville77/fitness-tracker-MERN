@@ -1,32 +1,46 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
+
 interface LoginFormProps {
-  // Props if needed
+  onSuccess: () => void; // Callback function to be called on successful login
 }
 
-const LoginForm: React.FC<LoginFormProps> = () => {
+const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
+
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
+  
     try {
-      const response = await axios.post('/users/login', {
+      const response = await axios.post('http://localhost:3001/users/login', {
         username,
         password,
       });
-
+  
       if (response.status === 200) {
-        console.log("Succesfully logged in")
+        
+        const token = response.data.token;
+        
+        localStorage.setItem('token', token);
+        console.log("Token:", token);
+        // Update the authentication state here
+        onSuccess(); // or call any function to update the state
       }
     } catch (error) {
-      console.log(error)
+      console.log("The error is: " + error);
+      // Handle errors here if needed
     }
   };
+  
+
 
   return (
+    <div className='flex justify-center'>
     <form className="w-full max-w-sm" onSubmit={handleSubmit}>
       <div className="md:flex md:items-center mb-6">
         <div className="md:w-1/3">
@@ -65,13 +79,13 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       <div className="md:flex md:items-center">
         <div className="md:w-1/3"></div>
         <div className="md:w-2/3">
-          <button className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+          <button className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
             Login
           </button>
         </div>
       </div>
     </form>
-
+    </div>
     
   );
 };
