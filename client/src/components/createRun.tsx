@@ -8,20 +8,29 @@ function CreateRunForm() {
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
 
-  // Define a function to handle form submission
+  
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     try {
-      // Make a POST request with the user input
-      const response = await axios.post('http://localhost:3001/exercise/newrun', {
-        distance: parseFloat(distance), // Parse the distance as a float
-        duration: parseInt(duration),   // Parse the duration as an integer
-      });
-
+      // Retrieve the token from local storage
+      const token = localStorage.getItem('token');
+  
+      // Make a POST request with the user input and token in the headers
+      const response = await axios.post(
+        'http://localhost:3001/exercise/newrun',
+        {
+          distance: parseFloat(distance),
+          duration: parseInt(duration),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
+        }
+      );
+  
       if (response.status === 200) {
         console.log(response.status);
-        // Clear the form after a successful submission
         setDistance('');
         setDuration('');
       }
