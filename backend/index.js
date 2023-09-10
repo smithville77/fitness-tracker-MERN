@@ -67,7 +67,7 @@ router.get('/auth/fitbit', (req, res) => {
   // Redirect the user to Fitbit for authorization
   res.redirect(fitbitAuthUrl);
 });
-
+ 
 
 // Callback route for handling Fitbit OAuth response
 router.get('/auth/fitbit/callback', async (req, res) => {
