@@ -12,12 +12,12 @@ function MyApp({ Component, pageProps }) {
   const { authenticated } = useAuth(); // Use the useAuth hook
 
   // Redirect to the login page if not authenticated
-  useEffect(() => {
-    const currentPath = router.pathname;
-    if (!authenticated && currentPath !== '/login') {
-      router.push('/login');
-    }
-  }, [authenticated, router]);
+  // useEffect(() => {
+  //   const currentPath = router.pathname;
+  //   if (!authenticated && currentPath !== '/login') {
+  //     router.push('/login');
+  //   }
+  // }, [authenticated, router]);
   
 
   return <Component {...pageProps} />;
