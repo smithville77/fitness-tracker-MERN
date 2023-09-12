@@ -25,7 +25,7 @@ function LoginPage() {
       {authenticated ? (
         <CreateRunForm />
       ) : (
-        // Render the login form
+        // Render the login form 
         <LoginForm onSuccess={login} />
       )}
     </div>
