@@ -25,7 +25,6 @@ export default function Home() {
       <Navigation />
       <h1>RunApp</h1>
       <p>Welcome to the home page!</p>
-      <br></br>
       {/* <Link href="/login">Login</Link> */}
       <Button onClick={handleLoginFormClick}>Login</Button>
       <Button onClick={handleSignUpFormClick}>Signup</Button>
