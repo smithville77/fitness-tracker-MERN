@@ -1,62 +1,55 @@
 require('dotenv').config();
 
 const express = require("express");
-const router = express.Router();
-module.exports = router;
-const axios = require('axios')
+const axios = require('axios');
 const mongoose = require("mongoose");
-const mongoString = process.env.DATABASE_URL;
 const bodyParser = require('body-parser');
 const cors = require("cors");
 
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
-// const salt = 10;
+const app = express();
+const router = express.Router();
 
-// bcrypt.genSalt(10, (error, salt) => {
+app.set('view engine', 'ejs');
+app.use(express.static("public"));
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// })
+const userRoutes = require('./routes/userRoutes');
+const runRoutes = require('./routes/runRoutes');
 
-const userRoutes = require('./routes/userRoutes')
-const runRoutes = require('./routes/runRoutes')
-
-mongoose.connect(mongoString, { 
+mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
- });
+});
+
 const database = mongoose.connection;
 
 database.on('error', (error) => {
-  console.log(error)
+  console.log(error);
 });
 
 database.once('connected', () => {
-  console.log('Fitness Database Connected')
+  console.log('Fitness Database Connected');
 });
 
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+};
 
-
-const app = express();
-app.use(cors());
-app.set('view engine', 'ejs');
-
-app.use(express.static("public"));
-app.use(express.json())
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors(corsOptions));
 
 app.use('/users', userRoutes);
-//set this up after userRoutes are created
-// app.use('/exercise', exerciseRoutes);
-app.use("/exercise", runRoutes)
-
+app.use("/exercise", runRoutes);
 
 const fitbitClientId = process.env.FB_CLIENT_ID;
-const fitbitClientSecret = process.env.FB_CLIENT_SECRET; // Add this line to retrieve the client secret
+const fitbitClientSecret = process.env.FB_CLIENT_SECRET;
 const fitbitRedirectUri = 'http://localhost:3000/callback';
-const fitbitScopes = 'activity heartrate profile'; // Adjust scopes as needed
+const fitbitScopes = 'activity heartrate profile';
 
-// Endpoint to initiate Fitbit OAuth flow
-router.get('/auth/fitbit', (req, res) => {
+app.get('/auth/fitbit', cors(corsOptions), (req, res, next) => {
+  console.log('Reached /fitbit route');
   // Construct the Fitbit authorization URL
   const fitbitAuthUrl = 'https://www.fitbit.com/oauth2/authorize?' +
     `response_type=code&` +
@@ -67,14 +60,11 @@ router.get('/auth/fitbit', (req, res) => {
   // Redirect the user to Fitbit for authorization
   res.redirect(fitbitAuthUrl);
 });
- 
 
-// Callback route for handling Fitbit OAuth response
-router.get('/auth/fitbit/callback', async (req, res) => {
-  const { code } = req.query; // Extract the authorization code from the query parameters
+app.get('/auth/fitbit/callback', async (req, res) => {
+  const { code } = req.query;
 
   try {
-    // Define the token request parameters
     const tokenRequestData = {
       client_id: fitbitClientId,
       grant_type: 'authorization_code',
@@ -82,7 +72,6 @@ router.get('/auth/fitbit/callback', async (req, res) => {
       redirect_uri: fitbitRedirectUri,
     };
 
-    // Send a POST request to Fitbit's token endpoint
     const response = await axios.post('https://api.fitbit.com/oauth2/token', null, {
       params: tokenRequestData,
       headers: {
@@ -90,32 +79,16 @@ router.get('/auth/fitbit/callback', async (req, res) => {
       },
     });
 
-    // Extract the access token and other data from the response
     const accessToken = response.data.access_token;
     const refreshToken = response.data.refresh_token;
 
-    // Save the tokens to your database or session as needed
-    // Example: await saveTokensToDatabase(accessToken, refreshToken);
-
-    // Redirect the user to a success page or perform further actions
-    res.redirect('/auth/fitbit/success'); // Redirect to a success page
+    res.redirect('/auth/fitbit/success');
   } catch (error) {
     console.error(error);
-    res.redirect('/auth/fitbit/error'); // Redirect to an error page
+    res.redirect('/auth/fitbit/error');
   }
 });
 
-
-
-// mongoose.connect('mongodb://127.0.0.1/todolistDB');
-
-app.get('/', (req, res) => {
-  res.send("hello Adam")
-});
-
-
 app.listen(3001, () => {
-  console.log("Server started on PORT 3001")
-})
-
-module.exports = app;
+  console.log("Server started on PORT 3001");
+});
