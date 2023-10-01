@@ -191,23 +191,6 @@ app.get('/callback', async (req, res) => {
 
 
 
-// async function makeApiRequest(accessToken) {
-//   try {
-//     const apiUrl = 'https://api.fitbit.com/2/user/-/profile.json';
-
-//     const response = await axios.get(apiUrl, {
-//       headers: {
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//     });
-
-//     const profileData = response.data;
-//     response.json({ profileData });
-//   } catch (error) {
-//     console.error('Error making API request:', error);
-//     response.status(500).json({ error: 'Internal server error' });
-//   }
-// }
 
 app.get('/profile', async (req, res) => {
   try {
@@ -236,7 +219,51 @@ app.get('/profile', async (req, res) => {
   }
 });
 
+app.get('/runDisplayPage', async (req, res) => {
+  try {
+    // Wait for the promise to resolve and get the access token
+    const accessToken = await accessTokenPromise;
+    
+
+    if (accessToken) {
+      const profileUrl = 'https://api.fitbit.com/2/user/-/profile.json';
+
+      const profileResponse = await axios.get(profileUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const profileData = profileResponse.data;
+      const userId = profileData.user.encodedId; // Extract the user ID
+
+      const afterDate = '1970-01-01'; 
+      // Now you can use the userId to make further requests to the Fitbit API
+      // const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/steps/date/today/1d.json`;
+      const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/steps/date/2023-01-11/1y.json`
+
+      
+      const runResponse = await axios.get(runUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const runData = runResponse.data;
+
+      // Send the running data in the response
+      res.json({ runData });
+    } else {
+      // Handle the case when accessToken is null
+      res.status(401).json({ error: 'Unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error making API request:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
