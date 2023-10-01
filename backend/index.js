@@ -49,55 +49,6 @@ app.use(cors(corsOptions));
 app.use('/users', userRoutes);
 app.use("/exercise", runRoutes);
 
-// const fitbitClientId = process.env.FB_CLIENT_ID;
-// const fitbitClientSecret = process.env.FB_CLIENT_SECRET;
-// const fitbitRedirectUri = 'http://localhost:3000/callback';
-// const fitbitScopes = 'activity heartrate profile';
-
-// app.get('/auth/fitbit', cors(corsOptions), (req, res, next) => {
-//   console.log('Reached /fitbit route');
-//   // Construct the Fitbit authorization URL
-//   const fitbitAuthUrl = 'https://www.fitbit.com/oauth2/authorize?' +
-//     `response_type=code&` +
-//     `client_id=${fitbitClientId}&` +
-//     `redirect_uri=${fitbitRedirectUri}&` +
-//     `scope=${fitbitScopes}`;
-
-//   // Redirect the user to Fitbit for authorization
-//   res.redirect(fitbitAuthUrl);
-// });
-
-// app.get('/auth/fitbit/callback', async (req, res) => {
-//   const { code } = req.query;
-
-//   try {
-//     const tokenRequestData = {
-//       client_id: fitbitClientId,
-//       grant_type: 'authorization_code',
-//       code: code,
-//       redirect_uri: fitbitRedirectUri,
-//     };
-
-//     const response = await axios.post('https://api.fitbit.com/oauth2/token', null, {
-//       params: tokenRequestData,
-//       headers: {
-//         Authorization: `Basic ${Buffer.from(`${fitbitClientId}:${fitbitClientSecret}`).toString('base64')}`,
-//       },
-//     });
-
-//     const accessToken = response.data.access_token;
-//     const refreshToken = response.data.refresh_token;
-
-//     res.redirect('/auth/fitbit/success');
-//   } catch (error) {
-//     console.error(error);
-//     res.redirect('/auth/fitbit/error');
-//   }
-// });
-
-// app.listen(3001, () => {
-//   console.log("Server started on PORT 3001");
-// });
 
 
 
@@ -106,14 +57,14 @@ const port = 3001;
 app.use(express.json());
 
 
-
+let codeVerifier;
 const crypto = require('crypto');
 
 // Function to generate a random code verifier
 function generateCodeVerifier() {
   const codeVerifierLength = 128; // Length of the code verifier (minimum 43 characters)
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
-  let codeVerifier = '';
+  codeVerifier = '';
 
   for (let i = 0; i < codeVerifierLength; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
@@ -150,8 +101,8 @@ module.exports = {
 
 const fitbitClientId = '23RF4V';
 const fitbitClientSecret = '73a73bf8526e1bea2a0189cf6c3b674f';
-const fitbitRedirectUri = 'http://localhost:3000/callback';
-const fitbitScopes = 'activity heartrate profile';
+const fitbitRedirectUri = 'https://ed8d-58-108-98-222.ngrok-free.app/callback';
+const fitbitScopes = 'activity cardio_fitness electrocardiogram heartrate location nutrition oxygen_saturation profile respiratory_rate settings sleep social temperature weight';
 
 app.get('/auth/fitbit', cors(corsOptions), async (req, res, next) => {
   try {
@@ -175,32 +126,60 @@ app.get('/auth/fitbit', cors(corsOptions), async (req, res, next) => {
   }
 });
 
-app.get('/callback', (req, res) => {
-  const { code, state } = req.query;
-  
-  if (state !== expectedState) {
-    return res.status(400).json({ error: 'Invalid state parameter' });
-  }
+// Define a success route
+app.get('/success', (req, res) => {
+  // You can customize this response to display a success message or render a success page
+  res.status(200).send('Success! Your request was processed successfully.');
+});
 
+// Define an error route
+app.get('/error', (req, res) => {
+  // You can customize this response to display an error message or render an error page
+  res.status(500).send('Error! Something went wrong on the server.');
+});
+
+
+let accessToken;
+
+
+
+
+
+
+let accessTokenPromise = null;
+
+app.get('/callback', async (req, res) => {
+  console.log("Reached the /callback route");
+  const { code } = req.query;
+  console.log(code);
   try {
-    // Exchange the authorization code for tokens
-    const response = axios.post('https://api.fitbit.com/oauth2/token', null, {
-      params: {
-        client_id: fitbitClientId,
-        grant_type: 'authorization_code',
-        code: code,
-        redirect_uri: fitbitRedirectUri,
-      },
-      headers: {
-        Authorization: `Basic ${Buffer.from(`${fitbitClientId}:${fitbitClientSecret}`).toString('base64')}`,
-      },
-    });
+    const tokenRequestData = new URLSearchParams();
+    tokenRequestData.append('client_id', fitbitClientId);
+    tokenRequestData.append('grant_type', 'authorization_code');
+    tokenRequestData.append('code', code);
+    tokenRequestData.append('redirect_uri', fitbitRedirectUri);
+    tokenRequestData.append('code_verifier', codeVerifier);
 
-    // Extract access token and optionally refresh token from the response
-    const accessToken = response.data.access_token;
-    const refreshToken = response.data.refresh_token;
+    const tokenResponse = await axios.post(
+      'https://api.fitbit.com/oauth2/token',
+      tokenRequestData,
+      {
+        headers: {
+          Authorization: `Basic ${Buffer.from(
+            `${fitbitClientId}:${fitbitClientSecret}`
+          ).toString('base64')}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+
+    const newAccessToken = tokenResponse.data.access_token;
+    const refreshToken = tokenResponse.data.refresh_token;
 
     // Store the tokens securely, e.g., in a database or session
+    
+    // Resolve the promise with the new access token before redirecting
+    accessTokenPromise = Promise.resolve(newAccessToken);
 
     // Redirect the user to a success page or perform further actions
     res.redirect('/success');
@@ -211,6 +190,51 @@ app.get('/callback', (req, res) => {
 });
 
 
+
+// async function makeApiRequest(accessToken) {
+//   try {
+//     const apiUrl = 'https://api.fitbit.com/2/user/-/profile.json';
+
+//     const response = await axios.get(apiUrl, {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     });
+
+//     const profileData = response.data;
+//     response.json({ profileData });
+//   } catch (error) {
+//     console.error('Error making API request:', error);
+//     response.status(500).json({ error: 'Internal server error' });
+//   }
+// }
+
+app.get('/profile', async (req, res) => {
+  try {
+    // Wait for the promise to resolve and get the access token
+    const accessToken = await accessTokenPromise;
+    console.log('Access Token:', accessToken);
+
+    if (accessToken) {
+      const apiUrl = 'https://api.fitbit.com/2/user/-/profile.json';
+      const response = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const profileData = response.data;
+
+      // Send the profile data in the response
+      res.json({ profileData });
+    } else {
+      // Handle the case when accessToken is null
+      res.status(401).json({ error: 'Unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error making API request:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
