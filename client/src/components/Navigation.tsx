@@ -24,14 +24,15 @@ function Navigation() {
   };
 
   return (
-    <nav className="bg-blue-500 p-4">
+    <nav className="bg-black p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-2xl font-bold">Run Tracker</div>
         <div className='flex container justify-end'>
-        <Link className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer " href="/createRun">Create Run</Link>
-        <Link className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer" href="/">Home</Link>
-        <Link className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer" href="/profile">Profile</Link>
-        <FitbitAuthButton />
+        <Link className="bg-red-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer " href="/createRun">Create Run</Link>
+        <Link className="bg-red-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer" href="/">Home</Link>
+        <Link className="bg-red-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer" href="/profile">Profile</Link>
+        <Link className="bg-red-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer" href="/runDisplayPage">runData</Link>
+        <FitbitAuthButton  />
         {authenticated ? (
           <a
             onClick={handleLogout}

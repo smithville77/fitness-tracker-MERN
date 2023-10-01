@@ -43,7 +43,7 @@ const FitbitAuthButton = () => {
   };
 
   return (
-    <button onClick={initiateFitbitAuth}>Authorize with Fitbit</button>
+    <button className="bg-red-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer" onClick={initiateFitbitAuth}>Authorize with Fitbit</button>
   );
 };
 
