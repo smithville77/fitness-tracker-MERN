@@ -30,6 +30,7 @@ function Navigation() {
         <div className='flex container justify-end'>
         <Link className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer " href="/createRun">Create Run</Link>
         <Link className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer" href="/">Home</Link>
+        <Link className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 mx-2 rounded cursor-pointer" href="/profile">Profile</Link>
         <FitbitAuthButton />
         {authenticated ? (
           <a
