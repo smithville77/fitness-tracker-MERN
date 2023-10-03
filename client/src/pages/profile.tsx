@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function Profile() {
   const [profileData, setProfileData] = useState(null);
+  const [dashData, setDashData] = useState(null)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,27 +21,40 @@ function Profile() {
       .then((response) => {
         console.log(response);
         setProfileData(response.data.profileData);
-        setLoading(false); // Data fetching is complete
+        setDashData(response.data.dashData)
+        setLoading(false); 
       })
       .catch((error) => {
         console.error('Error fetching profile data:', error);
-        setLoading(false); // Data fetching is complete, even if it failed
+        setLoading(false); 
       });
-  }, []); // Include accessToken in the dependencies array
+  }, []); 
 
   return (
     <div className="Profile">
       <Navigation />
-      <h1>Fitbit Profile Data</h1>
+      <h1>Welcome to your Dashboard</h1>
       
       {loading ? (
         <p>Loading profile data...</p>
       ) : profileData ? (
-        <div>
-          <p>Name: {profileData.user.displayName}</p>
-          <p>Age: {profileData.user.age}</p>
-          <p>Gender: {profileData.user.gender}</p>
-        </div>
+        <>
+          <div>
+            <p>Welcome, {profileData.user.displayName}!</p>
+            <p>Age: {profileData.user.age}</p>
+            <p>Gender: {profileData.user.gender}</p>
+          </div>
+          <div>
+          <p>Today's Steps: {dashData.summary.steps}</p>
+          <p>Today's floors: {dashData.summary.floors}</p>
+          <p>Today's total distance: {dashData.summary.distances.total}</p>
+          <p>Today's calories burnt: {dashData.summary.calories}</p>
+          <p>Today's zone minutes: {dashData.summary.veryActiveMinutes}</p>
+
+
+          </div>
+        </>
+        
       ) : (
         <p>No profile data available</p>
       )}
