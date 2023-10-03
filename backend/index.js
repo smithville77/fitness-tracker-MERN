@@ -101,7 +101,7 @@ module.exports = {
 
 const fitbitClientId = '23RF4V';
 const fitbitClientSecret = '73a73bf8526e1bea2a0189cf6c3b674f';
-const fitbitRedirectUri = 'https://ed8d-58-108-98-222.ngrok-free.app/callback';
+const fitbitRedirectUri = 'http://localhost:3001/callback';
 const fitbitScopes = 'activity cardio_fitness electrocardiogram heartrate location nutrition oxygen_saturation profile respiratory_rate settings sleep social temperature weight';
 
 app.get('/auth/fitbit', cors(corsOptions), async (req, res, next) => {
@@ -205,10 +205,36 @@ app.get('/profile', async (req, res) => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+
       const profileData = response.data;
+      
+      const date = new Date();
+      const day = date.getDate(); 
+      const month = date.getMonth() + 1; 
+      const year = date.getFullYear();
+      const todaysDate = `${year}-${month}-${day}`;
+
+const userId = profileData.user.encodedId; // Extract the user ID
+const dashUrl = `https://api.fitbit.com/1/user/${userId}/activities/date/${todaysDate}.json`;
+
+      
+      const dashResponse = await axios.get(dashUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+        
+
+       
+      const dashData = dashResponse.data;
+
+      // Send the running data in the response
+      res.json({ dashData, profileData });
+    
 
       // Send the profile data in the response
-      res.json({ profileData });
+      // res.json({ profileData });
     } else {
       // Handle the case when accessToken is null
       res.status(401).json({ error: 'Unauthorized' });
@@ -237,7 +263,7 @@ app.get('/runDisplayPage', async (req, res) => {
       const profileData = profileResponse.data;
       const userId = profileData.user.encodedId; // Extract the user ID
 
-      const afterDate = '1970-01-01'; 
+      // const afterDate = '1970-01-01'; 
       // Now you can use the userId to make further requests to the Fitbit API
       // const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/steps/date/today/1d.json`;
       const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/steps/date/2023-01-11/1y.json`
