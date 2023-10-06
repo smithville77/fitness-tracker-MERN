@@ -283,8 +283,8 @@ app.get('/runDisplayPage', async (req, res) => {
       const afterDate = oneYearAgo.toISOString().split('T')[0]; // Format as YYYY-MM-DD
       // const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json`;
       console.log(oneYearAgo)
-      const allActivitiesUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json?afterDate=${afterDate}&sort=asc&offset=0&limit=100`;
-
+      const allActivitiesUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json?afterDate=${afterDate}&sort=desc&offset=0&limit=100`;
+      const secondSetActivitiesUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json?afterDate=${afterDate}&sort=desc&offset=100&limit=100`
       
       
       const allActivitiesResponse = await axios.get(allActivitiesUrl, {
@@ -292,14 +292,21 @@ app.get('/runDisplayPage', async (req, res) => {
           Authorization: `Bearer ${accessToken}`,
         },
       });;
+      const secondSetActivitiesResponse = await axios.get(secondSetActivitiesUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });;
 
-      // const runData = runResponse.data;
-
-      const runActivities = allActivitiesResponse.data.activities.filter(
-        (activity) => activity.activityTypeId === 90009
-      );
       
 
+      const firstSetRunActivities = allActivitiesResponse.data.activities.filter(
+        (activity) => activity.activityTypeId === 90009
+      );
+
+      const secondSetRunActivities =  secondSetActivitiesResponse.data.activities.filter((activity) => activity.activityTypeId === 90009);
+      
+      const runActivities = firstSetRunActivities.concat(secondSetRunActivities)
 
       
       res.json({ runData: runActivities });
