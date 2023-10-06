@@ -216,6 +216,7 @@ app.get('/profile', async (req, res) => {
 
 const userId = profileData.user.encodedId; // Extract the user ID
 const dashUrl = `https://api.fitbit.com/1/user/${userId}/activities/date/${todaysDate}.json`;
+;
 
       
       const dashResponse = await axios.get(dashUrl, {
@@ -266,19 +267,42 @@ app.get('/runDisplayPage', async (req, res) => {
       // const afterDate = '1970-01-01'; 
       // Now you can use the userId to make further requests to the Fitbit API
       // const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/steps/date/today/1d.json`;
-      const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/steps/date/2023-01-11/1y.json`
+      // const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/steps/date/2023-01-11/1y.json`
+      // const runUrl = `https://api.fitbit.com/1/user/-/activities/list.json?afterDate=2017-10-27&sort=asc&offset=0&limit=20`
+
+
+      // this api endpoint has lifetime stats and best overall stats i.e most steps in a day etc
+      // const runUrl = `https://api.fitbit.com/1/user/${userId}/activities.json`
+
 
       
-      const runResponse = await axios.get(runUrl, {
+
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+      const afterDate = oneYearAgo.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+      // const runUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json`;
+      console.log(oneYearAgo)
+      const allActivitiesUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json?afterDate=${afterDate}&sort=asc&offset=0&limit=100`;
+
+      
+      
+      const allActivitiesResponse = await axios.get(allActivitiesUrl, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      });
+      });;
 
-      const runData = runResponse.data;
+      // const runData = runResponse.data;
+
+      const runActivities = allActivitiesResponse.data.activities.filter(
+        (activity) => activity.activityTypeId === 90009
+      );
+      
+
 
       // Send the running data in the response
-      res.json({ runData });
+      res.json({ runData: runActivities });
     } else {
       // Handle the case when accessToken is null
       res.status(401).json({ error: 'Unauthorized' });
