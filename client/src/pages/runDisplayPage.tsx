@@ -11,14 +11,15 @@ function RunDisplayPage() {
     const accessToken = localStorage.getItem('accessToken');
 
     // Make the GET request to your backend endpoint with the access token
-    axios.get('http://localhost:3001/runDisplayPage', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
+    axios
+      .get('http://localhost:3001/runDisplayPage', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
         console.log('API Response:', response.data.runData);
-        setRunData(response.data.runData['activities-steps']);
+        setRunData(response.data.runData);
         setLoading(false);
       })
       .catch((error) => {
@@ -36,7 +37,7 @@ function RunDisplayPage() {
         <div>
           {runData.map((item, index) => (
             <div key={index}>
-              <p>Steps on {item.dateTime}: {item.value || 'N/A'}</p>
+              <p>Run distance: {item.distance}</p>
               {/* You can display other information here */}
             </div>
           ))}

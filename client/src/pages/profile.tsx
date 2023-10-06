@@ -47,8 +47,8 @@ function Profile() {
           <div>
           <p>Today's Steps: {dashData.summary.steps}</p>
           <p>Today's floors: {dashData.summary.floors}</p>
-          <p>Today's total distance: {dashData.summary.distances.total}</p>
-          <p>Today's calories burnt: {dashData.summary.calories}</p>
+          <p>Today's total distance: {dashData.summary.distances[1].distance}</p>
+          <p>Today's calories burnt: {dashData.summary.caloriesOut}</p>
           <p>Today's zone minutes: {dashData.summary.veryActiveMinutes}</p>
 
 
