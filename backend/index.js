@@ -301,7 +301,7 @@ app.get('/runDisplayPage', async (req, res) => {
       
 
 
-      // Send the running data in the response
+      
       res.json({ runData: runActivities });
     } else {
       // Handle the case when accessToken is null
