@@ -176,7 +176,7 @@ app.get('/callback', async (req, res) => {
     const newAccessToken = tokenResponse.data.access_token;
     const refreshToken = tokenResponse.data.refresh_token;
 
-    // Store the tokens securely, e.g., in a database or session
+    // 
     
     // Resolve the promise with the new access token before redirecting
     accessTokenPromise = Promise.resolve(newAccessToken);
@@ -185,7 +185,7 @@ app.get('/callback', async (req, res) => {
     res.redirect('/success');
   } catch (error) {
     console.error(error);
-    res.redirect('/error'); // Redirect to an error page if there's an issue
+    res.redirect('/error'); 
   }
 });
 
@@ -311,7 +311,7 @@ app.get('/runDisplayPage', async (req, res) => {
       
       res.json({ runData: runActivities });
     } else {
-      // Handle the case when accessToken is null
+  
       res.status(401).json({ error: 'Unauthorized' });
     }
   } catch (error) {
