@@ -234,7 +234,7 @@ const dashUrl = `https://api.fitbit.com/1/user/${userId}/activities/date/${today
       res.json({ dashData, profileData });
     
 
-      // Send the profile data in the response
+      // Send the profile data in the respons
       // res.json({ profileData });
     } else {
       // Handle the case when accessToken is null
