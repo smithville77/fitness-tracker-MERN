@@ -55,6 +55,23 @@ function RunDisplayPage() {
     setSelectedRange(selectedRange);
   };
 
+  const filterBySpeedData = () => {
+    const speedData = runData.sort((a, b) => {
+      return b.speed - a.speed
+    })
+    
+    setRunData([...speedData])
+    console.log('reached')
+  }
+
+  const filterByDistance = () => {
+    const distanceData = runData.sort((a, b) => {
+      return b.distance - a.distance
+    })
+    setRunData([...distanceData])
+  }
+
+
   const filteredData = filterData();
 
   return (
@@ -69,6 +86,12 @@ function RunDisplayPage() {
           </option>
         ))}
       </select>
+      <button id="speed-sort" onClick={filterBySpeedData}>
+        Filter By Speed
+      </button>
+      <button id="distance-sort" onClick={filterByDistance}>
+        Filter By Distance
+      </button>
       <div>
         {loading ? (
           <p>Loading run data...</p>
@@ -76,7 +99,7 @@ function RunDisplayPage() {
           <div>
             {filteredData.map((item, index) => (
               <div key={index}>
-                <p>Run distance: {item.distance} Run speed: {parseFloat(item.speed).toFixed(2)}</p>
+                <p>Run distance: {parseFloat(item.distance).toFixed(2)} Run speed: {parseFloat(item.speed).toFixed(2)}</p>
                 
               </div>
             ))}
