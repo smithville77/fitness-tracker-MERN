@@ -128,8 +128,9 @@ app.get('/auth/fitbit', cors(corsOptions), async (req, res, next) => {
 
 // Define a success route
 app.get('/success', (req, res) => {
-  // You can customize this response to display a success message or render a success page
-  res.status(200).send('Success! Your request was processed successfully.');
+  
+  res.redirect('http://localhost:3000/profile')
+  
 });
 
 // Define an error route
@@ -186,7 +187,7 @@ app.get('/callback', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.redirect('/error'); 
-  }
+  } 
 });
 
 
