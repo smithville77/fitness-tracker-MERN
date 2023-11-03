@@ -240,7 +240,7 @@ const dashUrl = `https://api.fitbit.com/1/user/${userId}/activities/date/${today
       const afterDate = tenDaysAgo.toISOString().split('T')[0];
 
       
-      const allActivitiesUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json?afterDate=${afterDate}&sort=asc&offset=0&limit=10`;
+      const allActivitiesUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json?afterDate=${afterDate}&sort=desc&offset=0&limit=30`;
       
 
       const allActivitiesResponse = await axios.get(allActivitiesUrl, {
@@ -249,12 +249,30 @@ const dashUrl = `https://api.fitbit.com/1/user/${userId}/activities/date/${today
         },
       });;
 
+      
       const recentActivities = allActivitiesResponse.data
+      const recentRuns = allActivitiesResponse.data.activities.filter(
+        (activity) => activity.activityTypeId === 90009
+      );
+
+
+
+      // const weeklyStepsUrl = `https://api.fitbit.com/1/user/${userId}/activities/steps/date/${tenDaysAgo}/${today}.json`;
+     
+      
+
+      // const weeklyStepsResponse = await axios.get(weeklyStepsUrl, {
+      //   headers: {
+      //     Authorization: `Bearer ${accessToken}`,
+      //   },
+      // });;
+
+      
+      // const weeklySteps = weeklyStepsResponse.data
 
       // Send the running data in the response
-      res.json({ dashData, profileData, recentActivities });
+      res.json({ dashData, profileData, recentActivities, recentRuns });
     
-
       
     } else {
       // Handle the case when accessToken is null
