@@ -231,12 +231,31 @@ const dashUrl = `https://api.fitbit.com/1/user/${userId}/activities/date/${today
        
       const dashData = dashResponse.data;
 
+
+
+      const today = new Date();
+      const tenDaysAgo = new Date(today);
+      tenDaysAgo.setDate(today.getDate() - 10);
+
+      const afterDate = tenDaysAgo.toISOString().split('T')[0];
+
+      
+      const allActivitiesUrl = `https://api.fitbit.com/1/user/${userId}/activities/list.json?afterDate=${afterDate}&sort=asc&offset=0&limit=10`;
+      
+
+      const allActivitiesResponse = await axios.get(allActivitiesUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });;
+
+      const recentActivities = allActivitiesResponse.data
+
       // Send the running data in the response
-      res.json({ dashData, profileData });
+      res.json({ dashData, profileData, recentActivities });
     
 
-      // Send the profile data in the respons
-      // res.json({ profileData });
+      
     } else {
       // Handle the case when accessToken is null
       res.status(401).json({ error: 'Unauthorized' });
