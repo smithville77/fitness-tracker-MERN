@@ -6,8 +6,9 @@ body {
   background-color: rgb(46, 46, 46);
 }
 
-
-
+#welcome-text {
+  font-size: 3rem;
+}
 #greet {
   grid-area: greet;
   padding: 2rem;
@@ -25,6 +26,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 1.5rem 0.5rem;
 }
 
@@ -99,6 +101,22 @@ body {
 .inner-square > p {
   padding: 1rem;
   margin: 0 auto;
+}
+
+.line-graph {
+  /* margin: 1rem; */
+  border: 1px transparent rgb(87, 87, 87);
+  padding: 1rem;
+  /* text: white; */
+  background-color: rgb(87, 87, 87);
+}
+
+#recent-runs {
+  background-color: rgb(87, 87, 87);
+  border: none;
+  /* text: white; */
+  border-radius: 0;
+  
 }
 
 /* #daily-data{
