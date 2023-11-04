@@ -1,10 +1,12 @@
 import React from 'react';
-import { AccessibleForward, DirectionsRun, SportsSoccer, FitnessCenter, Pool, FreeBreakfast } from '@mui/icons-material'; 
+import { AccessibleForward, DirectionsRun, SportsSoccer, FitnessCenter } from '@mui/icons-material'; 
 import FitnessCenterRoundedIcon from '@mui/icons-material/FitnessCenterRounded';
 import DirectionsRunRoundedIcon from '@mui/icons-material/DirectionsRunRounded';
 import SportsGymnasticsRoundedIcon from '@mui/icons-material/SportsGymnasticsRounded';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun'
 import DirectionsWalkRoundedIcon from '@mui/icons-material/DirectionsWalkRounded';
+import { Card, Title } from "@tremor/react";
+
 
 interface RecentExerciseProps {
   name: string;
@@ -24,22 +26,26 @@ const RecentExercise: React.FC<RecentExerciseProps> = ({ name, length, date, cal
     Default: <SportsGymnasticsRoundedIcon />
   };
 
-  // Get the corresponding icon for the exercise (or use the default icon)
+ 
   const exerciseIcon = exerciseIcons[name] || exerciseIcons.Default;
 
   return (
+    <Card className="max-w-xs mx-auto exercise-card" decoration="bottom" decorationColor="indigo">
     <div className="recent-exercise">
       <div className="recent-top">
-        {exerciseIcon}
-        <h6>{name}</h6>
-        <p>{date}</p>
+        <div className="exercise-name-icon">
+          {exerciseIcon}
+          <h6>{name}</h6>
+        </div>
+        
+        <p className="recent-exercise-date"><em>{date}</em></p>
       </div>
       <div className="time-container">
-        <p>{length}</p>
-        <p>cals:{calories}</p>
+        <p><span className="recent-ex-length">{length}</span> mins</p>
+        <p><span className="recent-ex-length">{calories}</span> cals</p>
       </div>
-      <hr />
     </div>
+    </Card>
   );
 };
 

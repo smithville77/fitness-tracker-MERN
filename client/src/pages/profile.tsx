@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import Square from '@/components/Square';
+import Clock from  '@/components/Clock';
 import RecentExercise from '@/components/RecentExercise';
-import { Card, LineChart, Title } from "@tremor/react";
+import { Card, AreaChart, Title, BarList, BarChart } from "@tremor/react";
 
 
 
@@ -17,6 +18,7 @@ function Profile() {
   const [dashData, setDashData] = useState(null)
   const [recentExercise, setRecentExercise] = useState(null)
   const [recentRuns, setRecentRuns] = useState(null)
+  const [recentSteps, setRecentSteps] = useState(null)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,6 +38,7 @@ function Profile() {
         setDashData(response.data.dashData);
         setRecentExercise(response.data.recentActivities)
         setRecentRuns(response.data.recentRuns)
+        setRecentSteps(response.data.weeklySteps)
         setLoading(false); 
       })
       .catch((error) => {
@@ -44,7 +47,7 @@ function Profile() {
       });
   }, []); 
 
-  console.log(recentRuns)
+  console.log(recentSteps)
 
   let totalDistance, distGoal, distPct;
   let steps,stepGoal, stepPct;
@@ -85,6 +88,42 @@ function Profile() {
       })
     }));
   }
+
+  let weeklyStepData;
+  console.log(recentSteps);
+  if (recentSteps) {
+    weeklyStepData = recentSteps["activities-steps"].map(item => {
+      const inputDate = new Date(item.dateTime);
+  
+      // Define an array of day names
+      const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  
+      // Get the day of the week (0 = Sunday, 1 = Monday, etc.)
+      const dayIndex = inputDate.getDay();
+  
+      // Get the short day name
+      const dayName = dayNames[dayIndex];
+  
+      return {
+        day: dayName,
+        steps: item.value,
+      };
+    });
+  }
+  const valueFormatter = (number) => `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
+  // Now weeklyStepData contains the short day names
+  
+  let topBadges;
+  if (profileData) {
+    topBadges = profileData.user.topBadges;
+  }
+  // Now you can use weeklyStepData for rendering or other purposes.
+  
+ 
+
+
+
+
   
 
   
@@ -104,9 +143,12 @@ function Profile() {
           <div id='greet'>
           <div>
             <h1 id="welcome-text">Welcome, {profileData.user.displayName}!</h1>
-            <h3>Take a look at your day so far..</h3>
+            <h3>Let's take a look at your day so far..</h3>
 
           </div>
+          <span>
+            <Clock />
+          </span>
 
               
           </div>
@@ -118,7 +160,7 @@ function Profile() {
                     value={stepPct}
                     radius={60}
                     strokeWidth={20}
-                    tooltip="radius: 50, strokeWidth: 8"
+                    tooltip="Total steps today"
                     showAnimation={true}
                     color={stepPct > 100 ? "green" : "indigo"}
                   >
@@ -134,7 +176,7 @@ function Profile() {
                     value={activeMinsPct}
                     radius={60}
                     strokeWidth={20}
-                    tooltip="radius: 50, strokeWidth: 8"
+                    tooltip="Total active minutes today"
                     showAnimation={true}
                     color={activeMinsPct > 100 ? "green" : "indigo"}
                   >
@@ -149,7 +191,7 @@ function Profile() {
                     value={distPct}
                     radius={60}
                     strokeWidth={20}
-                    tooltip="radius: 50, strokeWidth: 8"
+                    tooltip="Total daily distance"
                     showAnimation={true}
                     
                     color={distPct > 100 ? "green" : "indigo"}
@@ -166,7 +208,7 @@ function Profile() {
                     value={calPct}
                     radius={60}
                     strokeWidth={20}
-                    tooltip="radius: 50, strokeWidth: 8"
+                    tooltip="Total expended calories today"
                     showAnimation={true}
                     
                     color={calPct > 100 ? "green" : "indigo"}
@@ -183,10 +225,11 @@ function Profile() {
 
 
           <div id="recent-data">
-            <Square  style={{ border: 'none', width: '100%', height: '100%' }}>
-              <Card id="recent-runs" style={{ border: 'none', width: '100%', height: '100%' }}>
-                <Title>Recent Runs</Title>
-                <LineChart
+            {/* <Card id="recent-runs" style={{ border: 'none', width: '100%', height: '100%' }}> */}
+            <Square>
+              <div id="recent-runs">
+                <Title className="graph-title">Recent Runs</Title>
+                <AreaChart
                   className="line-graph"
                   data={reducedData}
                   index="date"
@@ -198,24 +241,51 @@ function Profile() {
                   yAxisWidth={50}
                   
                 />
-              </Card>
+                </div>
+              {/* </Card> */}
 
               
-            </Square><Square height={200} width={200}>
-              <p>Today's calories burnt: {dashData.summary.caloriesOut}</p>
-            </Square><Square height={200} width={200}>
-              <p>Today's calories burnt: {dashData.summary.caloriesOut}</p>
             </Square>
+            
+            <Square>
+              <div id="recent-runs">
+            <Title className="graph-title">Daily Steps - Past Week</Title>
+                 <BarChart
+                  className="h-72 mt-4"
+                  data={weeklyStepData}
+                  index="day"
+                  categories={["steps"]}
+                  colors={["blue"]}
+                  yAxisWidth={30}
+                  // customTooltip={customTooltip}
+                />
+              </div>
+            </Square>
+            
+            <Square>
+              <div id="outer-container">
+                <Title>Top Badges</Title>
+                <div id="top-badges-container">
+                  {topBadges.map(badge => (
+                    <div key={badge.id} className="badge-item">
+                      <img src={badge.image75px} alt={badge.description} />
+                      <p>{badge.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Square>
+
           </div>
 
 
           <div id="sidebar">
             <p>Recent Activity</p>
-            {recentExercise.activities.slice(0,10).map( exercise => (
+            {recentExercise.activities.slice(0,8).map( exercise => (
               <RecentExercise
                 key={exercise.id}
                 name={exercise.activityName}
-                length={`${Math.floor((exercise.duration % 3600000) / 60000)} minutes`}
+                length={`${Math.floor((exercise.duration % 3600000) / 60000)}`}
                 date={new Date(exercise.originalStartTime).toLocaleString('en-GB', {
                   day: 'numeric',
                   month: 'numeric',
