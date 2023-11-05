@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "@/components/UseAuth";
 import LoginForm from "@/components/LoginForm";
+import Profile from "./profile";
 import Navigation from "@/components/Navigation";
 
 function LoginPage() {
@@ -14,16 +15,16 @@ function LoginPage() {
 
   return (
     <div>
-      {/* Display navigation or header if needed */}
-      <Navigation />
-
-      <h1 className="flex justify-center mt-5">Login Page</h1>
-
+  
       {authenticated ? (
-        <p>You are already logged in.</p>
+        <Profile />
       ) : (
         // Render the login form
-        <LoginForm onSuccess={login} />
+        <>
+          <Navigation />
+          <LoginForm onSuccess={login} />
+        </>
+        
       )}
     </div>
   );

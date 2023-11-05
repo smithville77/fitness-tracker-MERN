@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
+import RunEntry from '@/components/individualRunEntry';
+import Square from '@/components/Square';
 import axios from 'axios';
 
 function RunDisplayPage() {
   const [runData, setRunData] = useState([]);
+  const [currentRun, setCurrentRun] = useState(null)
   const [loading, setLoading] = useState(true);
   const [selectedRange, setSelectedRange] = useState(null);
 
@@ -21,6 +24,7 @@ function RunDisplayPage() {
       .then((response) => {
         console.log('API Response:', response.data.runData);
         setRunData(response.data.runData);
+        // setCurrentRun(runData[0])
         setLoading(false);
       })
       .catch((error) => {
@@ -28,6 +32,10 @@ function RunDisplayPage() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    setCurrentRun(runData[0])
+  }, [runData])
 
   const ranges = [
     { label: 'All Ranges', min: 0, max: 1000 }, 
@@ -71,43 +79,123 @@ function RunDisplayPage() {
     setRunData([...distanceData])
   }
 
+ 
 
   const filteredData = filterData();
+  
+  
 
   return (
-    <div className="Profile">
+    <div className="run-display">
       <Navigation />
-      <p>Recent runs total: {runData.length}</p>
-      <p>Select runs by distance</p>
-      <select id="range-dropdown" onChange={handleRangeChange}>
-        {ranges.map((range, index) => (
-          <option key={index} value={index}>
-            {range.label}
-          </option>
-        ))}
-      </select>
-      <button id="speed-sort" onClick={filterBySpeedData}>
-        Filter By Speed
-      </button>
-      <button id="distance-sort" onClick={filterByDistance}>
-        Filter By Distance
-      </button>
-      <div>
+      
+      <div id="run-display-grid-container">
+      <div id="display-container">
+      <div id="left-section">
         {loading ? (
           <p>Loading run data...</p>
         ) : filteredData.length > 0 ? (
           <div>
+            
+
             {filteredData.map((item, index) => (
-              <div key={index}>
-                <p>Run distance: {parseFloat(item.distance).toFixed(2)} Run speed: {parseFloat(item.speed).toFixed(2)}</p>
-                
-              </div>
+              <RunEntry
+                key={index}
+                date={new Date(item.originalStartTime).toLocaleString('en-GB', {
+                  day: 'numeric',
+                  month: 'numeric',
+                }) + " " + new Date(item.originalStartTime).toLocaleString('en-US', {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  hour12: true
+                })}
+                distance={parseFloat(item.distance).toFixed(2)}
+                speed={parseFloat(item.speed).toFixed(2)}
+              />
+              
             ))}
           </div>
         ) : (
           <p>No run data available for the selected range</p>
         )}
       </div>
+      <div id="depth-sidebar">
+      <div id="filter-data-section">
+        <div id="top-filter">
+            <p>Recent runs total: {runData.length}</p>
+            <p>Select range: 
+            <select id="range-dropdown" onChange={handleRangeChange}>
+              {ranges.map((range, index) => (
+                <option key={index} value={index}>
+                  {range.label}
+                </option>
+              ))}
+            </select>
+            </p>
+            </div>
+            <div id="bottom-filter">
+            <button id="speed-sort" onClick={filterBySpeedData}>
+              Filter By Speed
+            </button>
+            <button id="distance-sort" onClick={filterByDistance}>
+              Filter By Distance
+            </button>
+            </div>
+          </div>
+         <div id="stats-container">
+          <span>
+              <p>Run Stats</p>
+          </span>
+          {new Date(currentRun.originalStartTime).toLocaleString('en-GB', {
+                  day: 'numeric',
+                  month: 'numeric',
+                }) + " " + new Date(currentRun.originalStartTime).toLocaleString('en-US', {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  hour12: true
+                })}
+              
+
+              <p>distance {parseInt(currentRun.distance).toFixed(2)}</p>
+              <p>HR{currentRun.averageHeartRate}</p>
+              <p> avg Speed:{currentRun.speed.toFixed(2)}</p>
+              <p> duration: {currentRun.duration / 60000}</p>
+
+            </div>
+            <div id="weekly-goals-container">
+            <span>
+              <p>Effect on your day</p>
+          </span>
+            <p>total zone minutes {currentRun.activeZoneMinutes.totalMinutes}</p>
+              <p>Cals: {currentRun.calories}</p>
+              <p> Floors: {currentRun.elevationGain}</p>
+              <p> Steps:{currentRun.steps}</p>
+            </div>
+         
+            {/* <div id="cals-container">
+              <Square>
+              </Square>
+            </div> */}
+          
+          
+            <div id="map-container">
+            <span>
+              <p>Run Map</p>
+          </span>
+              {/* <Square>
+              </Square> */}
+            </div>
+           
+      </div>
+      
+           
+          
+    </div>
+    </div>
+          
+            
+          
+          
     </div>
   );
 }

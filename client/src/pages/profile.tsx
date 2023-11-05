@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation';
 import Square from '@/components/Square';
 import Clock from  '@/components/Clock';
 import RecentExercise from '@/components/RecentExercise';
+import ProfileSkeleton from '@/components/ProfileSkeleton';
 import { Card, AreaChart, Title, BarList, BarChart } from "@tremor/react";
 
 
@@ -137,7 +138,7 @@ function Profile() {
       {/* <h1>Welcome to your Dashboard</h1> */}
       
       {loading ? (
-        <p>Loading profile data...</p>
+        <ProfileSkeleton />
       ) : profileData ? (
         <div id='grid-container'>
           <div id='greet'>

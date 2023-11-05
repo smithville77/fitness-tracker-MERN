@@ -39,12 +39,12 @@ function Navigation() {
       />
 
         <div className='flex container justify-end'>
-        <Link className={`py-2 px-4 mx-2 rounded cursor-pointer ${router.pathname === '/createRun' ? 'active' : ''}`} href="/createRun">
+        {/* <Link className={`py-2 px-4 mx-2 rounded cursor-pointer ${router.pathname === '/createRun' ? 'active' : ''}`} href="/createRun">
             Create Run
-          </Link>
-          <Link className={`py-2 px-4 mx-2 rounded cursor-pointer ${router.pathname === '/' ? 'active' : ''}`} href="/">
+          </Link> */}
+          {/* <Link className={`py-2 px-4 mx-2 rounded cursor-pointer ${router.pathname === '/' ? 'active' : ''}`} href="/">
             Home
-          </Link>
+          </Link> */}
           <Link className={`py-2 px-4 mx-2 rounded cursor-pointer ${router.pathname === '/profile' ? 'active' : ''}`} href="/profile">
             Profile
           </Link>
