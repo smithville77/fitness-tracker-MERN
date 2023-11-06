@@ -197,7 +197,7 @@ app.get('/profile', async (req, res) => {
   try {
     // Wait for the promise to resolve and get the access token
     const accessToken = await accessTokenPromise;
-    console.log('Access Token:', accessToken);
+    // console.log('Access Token:', accessToken);
 
     if (accessToken) {
       const apiUrl = 'https://api.fitbit.com/2/user/-/profile.json';
