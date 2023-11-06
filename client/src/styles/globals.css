@@ -460,7 +460,9 @@ position: relative;
   height: 80px;
   background-color: rgb(87, 87, 87);
   margin: 20px;
+  border-radius: 15px;
   padding: 10px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
 .run-entry-top {
   display: flex;
@@ -523,6 +525,11 @@ position: relative;
   grid-area: left-section;
   overflow-y: auto; 
   background-color: rgb(46, 46, 46);
+  padding-top: 0rem;
+}
+
+#left-section > div > div:nth-child(1) {
+  margin-top: 0;
 }
 
 #depth-sidebar {
@@ -547,6 +554,7 @@ position: relative;
   background-color: rgb(87, 87, 87);
   border-radius: 15px;
   padding: 1.5rem;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
   color: white;
   display: flex;
   flex-direction: column;
@@ -574,6 +582,7 @@ position: relative;
   background-color: rgb(87, 87, 87);
   border-radius: 15px;
   position: relative;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
 
 #stats-container > span, #weekly-goals-container > span, #map-container > span {
@@ -604,6 +613,7 @@ position: relative;
   min-height: 200px; 
   min-width: 200px; 
   background-color: rgb(87, 87, 87);
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
 
 #weekly-goals-container {
@@ -614,4 +624,5 @@ position: relative;
   min-height: 200px; 
   min-width: 200px;  
   background-color: rgb(87, 87, 87);
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }

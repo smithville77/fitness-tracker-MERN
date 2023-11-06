@@ -9,33 +9,60 @@ function RunDisplayPage() {
   const [currentRun, setCurrentRun] = useState(null)
   const [loading, setLoading] = useState(true);
   const [selectedRange, setSelectedRange] = useState(null);
+  const [tcxLink, setTcxLink] = useState(null);
 
+const accessToken = localStorage.getItem('accessToken');
   useEffect(() => {
     // Retrieve the access token from localStorage
-    const accessToken = localStorage.getItem('accessToken');
-
+    
+    console.log("new useEffect triggerd")
     // Make the GET request to your backend endpoint with the access token
     axios
       .get('http://localhost:3001/runDisplayPage', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          
         },
       })
       .then((response) => {
         console.log('API Response:', response.data.runData);
         setRunData(response.data.runData);
-        // setCurrentRun(runData[0])
+        setCurrentRun(response.data.runData[0])
+        setTcxLink(response.data.runData[0].tcxLink)
         setLoading(false);
       })
+      
       .catch((error) => {
         console.error('Error fetching run data:', error);
         setLoading(false);
       });
   }, []);
 
-  useEffect(() => {
-    setCurrentRun(runData[0])
-  }, [runData])
+  // useEffect(() => {
+  //   setCurrentRun(runData[0])
+  // }, [])
+  
+ 
+  fetch(tcxLink, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then((xmlData) => {
+      console.log(xmlData);
+    })
+    .catch((error) => console.error("Error:", error));
+  
+
+
+  
+    
 
   const ranges = [
     { label: 'All Ranges', min: 0, max: 1000 }, 
@@ -142,49 +169,46 @@ function RunDisplayPage() {
             </button>
             </div>
           </div>
-         <div id="stats-container">
-          <span>
-              <p>Run Stats</p>
-          </span>
-          {new Date(currentRun.originalStartTime).toLocaleString('en-GB', {
-                  day: 'numeric',
-                  month: 'numeric',
-                }) + " " + new Date(currentRun.originalStartTime).toLocaleString('en-US', {
-                  hour: 'numeric',
-                  minute: 'numeric',
-                  hour12: true
-                })}
-              
+          {currentRun && (
+  <div id="stats-container">
+    <span>
+      <p>Run Stats</p>
+    </span>
+    {new Date(currentRun.originalStartTime).toLocaleString('en-GB', {
+      day: 'numeric',
+      month: 'numeric',
+    }) + " " + new Date(currentRun.originalStartTime).toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    })}
 
-              <p>distance {parseInt(currentRun.distance).toFixed(2)}</p>
-              <p>HR{currentRun.averageHeartRate}</p>
-              <p> avg Speed:{currentRun.speed.toFixed(2)}</p>
-              <p> duration: {currentRun.duration / 60000}</p>
+    <p>distance {parseInt(currentRun.distance).toFixed(2)}</p>
+    <p>HR{currentRun.averageHeartRate}</p>
+    <p> avg Speed:{currentRun.speed.toFixed(2)}</p>
+    <p> duration: {currentRun.duration / 60000}</p>
+  </div>
+)}
+{currentRun && (
+  <div id="weekly-goals-container">
+    <span>
+      <p>Effect on your day</p>
+    </span>
+    <p>total zone minutes {currentRun.activeZoneMinutes.totalMinutes}</p>
+    <p>Cals: {currentRun.calories}</p>
+    <p>Floors: {currentRun.elevationGain}</p>
+    <p>Steps:{currentRun.steps}</p>
+  </div>
+)}
+{currentRun && (
+  <div id="map-container">
+    <span>
+      <p>Run Map</p>
+    </span>
+    {/* Add the content for the Run Map */}
+  </div>
+)}
 
-            </div>
-            <div id="weekly-goals-container">
-            <span>
-              <p>Effect on your day</p>
-          </span>
-            <p>total zone minutes {currentRun.activeZoneMinutes.totalMinutes}</p>
-              <p>Cals: {currentRun.calories}</p>
-              <p> Floors: {currentRun.elevationGain}</p>
-              <p> Steps:{currentRun.steps}</p>
-            </div>
-         
-            {/* <div id="cals-container">
-              <Square>
-              </Square>
-            </div> */}
-          
-          
-            <div id="map-container">
-            <span>
-              <p>Run Map</p>
-          </span>
-              {/* <Square>
-              </Square> */}
-            </div>
            
       </div>
       
