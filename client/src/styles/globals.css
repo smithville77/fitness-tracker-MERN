@@ -33,7 +33,7 @@ position: relative;
   top: 20px;
 }
 
-.active {
+/* .active {
   background-color: orange;
   color: white;
   z-index: 3;
@@ -42,7 +42,7 @@ position: relative;
   top: 20px; 
   position: fixed;
   
-}
+} */
 
 
 

@@ -13,7 +13,7 @@ export function useAuth() {
     } else {
       setAuthenticated(false);
     }
-    console.log('User authenticated: ' + authenticated);
+    
   }, []);
 
   const login = async (username: string, password: string) => {

@@ -2,14 +2,14 @@ import React, { CSSProperties } from 'react';
 
 interface SquareProps {
   children: React.ReactNode;
-  style?: CSSProperties; 
+
 }
 
-const Square: React.FC<SquareProps> = ({ children, style }) => {
+const Square: React.FC<SquareProps> = ({ children }) => {
  
 
   return (
-    <div className="square" style={style}>
+    <div className="square">
       {children}
     </div>
   );

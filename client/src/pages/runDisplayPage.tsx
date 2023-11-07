@@ -1,65 +1,72 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import RunEntry from '@/components/individualRunEntry';
-import Square from '@/components/Square';
 import axios from 'axios';
 
 function RunDisplayPage() {
   const [runData, setRunData] = useState([]);
-  const [currentRun, setCurrentRun] = useState(null)
+  const [currentRun, setCurrentRun] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedRange, setSelectedRange] = useState(null);
   const [tcxLink, setTcxLink] = useState(null);
+  const [token, setToken] = useState(null);
 
-const accessToken = localStorage.getItem('accessToken');
   useEffect(() => {
     // Retrieve the access token from localStorage
-    
-    console.log("new useEffect triggerd")
-    // Make the GET request to your backend endpoint with the access token
-    axios
-      .get('http://localhost:3001/runDisplayPage', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          
-        },
-      })
-      .then((response) => {
-        console.log('API Response:', response.data.runData);
-        setRunData(response.data.runData);
-        setCurrentRun(response.data.runData[0])
-        setTcxLink(response.data.runData[0].tcxLink)
-        setLoading(false);
-      })
-      
-      .catch((error) => {
-        console.error('Error fetching run data:', error);
-        setLoading(false);
-      });
-  }, []);
+    const accessToken = localStorage.getItem('token');
+    if (accessToken) {
+      setToken(accessToken);
 
-  // useEffect(() => {
-  //   setCurrentRun(runData[0])
-  // }, [])
-  
- 
-  fetch(tcxLink, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.text();
-    })
-    .then((xmlData) => {
-      console.log(xmlData);
-    })
-    .catch((error) => console.error("Error:", error));
-  
+      // Make the GET request to your backend endpoint with the access token
+      axios
+        .get('http://localhost:3001/runDisplayPage', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          console.log('API Response:', response.data.runData);
+          setRunData(response.data.runData);
+          setCurrentRun(response.data.runData[0]);
+          const tcxResponse = response.data.runData[0].tcxLink;
+          const userId = response.data.userId;
 
+          // Replace the '-/' in the TCX link with the actual user ID
+          // const updatedTcxLink = tcxResponse.replace(/\/user\/-/, `/user/${userId}`);
+          setTcxLink(tcxResponse);
+
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching run data:', error);
+          setLoading(false);
+        });
+    }
+  }, []); // Only trigger this on component mount
+
+  useEffect(() => {
+    if (token && tcxLink) {
+      console.log(token)
+      axios
+        .get(tcxLink, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            return response.data;
+          }
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        })
+        .then((xmlData) => {
+          console.log(xmlData);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }, [tcxLink, token]);
 
   
     
