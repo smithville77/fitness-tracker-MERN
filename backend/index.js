@@ -176,7 +176,7 @@ app.get('/callback', async (req, res) => {
 
     const newAccessToken = tokenResponse.data.access_token;
     const refreshToken = tokenResponse.data.refresh_token;
-
+    // localStorage.setItem('token', newAccessToken);
     // 
     
     // Resolve the promise with the new access token before redirecting
@@ -348,7 +348,7 @@ app.get('/runDisplayPage', async (req, res) => {
       const runActivities = firstSetRunActivities.concat(secondSetRunActivities)
 
       
-      res.json({ runData: runActivities });
+      res.json({ runData: runActivities, userId });
     } else {
   
       res.status(401).json({ error: 'Unauthorized' });
