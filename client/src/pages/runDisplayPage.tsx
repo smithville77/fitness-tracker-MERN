@@ -8,14 +8,16 @@ function RunDisplayPage() {
   const [currentRun, setCurrentRun] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedRange, setSelectedRange] = useState(null);
+  const accessToken = localStorage.getItem('token');
   const [tcxLink, setTcxLink] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(accessToken);
 
+console.log(token)
   useEffect(() => {
     // Retrieve the access token from localStorage
-    const accessToken = localStorage.getItem('token');
-    if (accessToken) {
-      setToken(accessToken);
+    
+    if (token) {
+      // setToken(accessToken);
 
       // Make the GET request to your backend endpoint with the access token
       axios
@@ -28,12 +30,13 @@ function RunDisplayPage() {
           console.log('API Response:', response.data.runData);
           setRunData(response.data.runData);
           setCurrentRun(response.data.runData[0]);
+          // setTcxLink(response.data.runData[0].tcxLink)
           const tcxResponse = response.data.runData[0].tcxLink;
           const userId = response.data.userId;
 
           // Replace the '-/' in the TCX link with the actual user ID
-          // const updatedTcxLink = tcxResponse.replace(/\/user\/-/, `/user/${userId}`);
-          setTcxLink(tcxResponse);
+          const updatedTcxLink = tcxResponse.replace(/\/user\/-/, `/user/${userId}`);
+          setTcxLink(updatedTcxLink);
 
           setLoading(false);
         })
@@ -43,31 +46,52 @@ function RunDisplayPage() {
         });
     }
   }, []); // Only trigger this on component mount
-
-  useEffect(() => {
-    if (token && tcxLink) {
-      console.log(token)
-      axios
-        .get(tcxLink, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            return response.data;
-          }
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        })
-        .then((xmlData) => {
-          console.log(xmlData);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
+  // console.log("Bearer " + accessToken)
+  // console.log("TcxLink:" + tcxLink)
+  // useEffect(() => {
+  //   if (token && tcxLink) {
+  //     // console.log(token)
+  //     axios
+  //       .get(tcxLink, {
+  //         headers: {
+  //           Authorization: "Bearer " + accessToken,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         console.log(response)
+  //         if (response.status === 200) {
+  //           return response.data;
+  //         }
+  //         // throw new Error(`HTTP error! Status: ${response.status}`);
+  //       })
+  //       .then((xmlData) => {
+  //         console.log(xmlData);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error:", error);
+  //       });
+  //   }
+  // }, [tcxLink]);
+  const makeTCXRequest = async () => {
+    try {
+        const response = await axios.get(tcxLink, {
+            headers: {
+                Authorization: 'Bearer ' + accessToken,
+            },
         });
-    }
-  }, [tcxLink, token]);
 
+        console.log(response);
+        if (response.status === 200) {
+            const xmlData = response.data;
+            console.log(xmlData);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
+
+// Call the function directly
+makeTCXRequest();
   
     
 
@@ -192,8 +216,8 @@ function RunDisplayPage() {
 
     <p>distance {parseInt(currentRun.distance).toFixed(2)}</p>
     <p>HR{currentRun.averageHeartRate}</p>
-    <p> avg Speed:{currentRun.speed.toFixed(2)}</p>
-    <p> duration: {currentRun.duration / 60000}</p>
+    <p> avg Speed: {currentRun.speed.toFixed(2)}</p>
+    <p> duration: {parseInt(currentRun.duration / 60000).toFixed(0)} minutes</p>
   </div>
 )}
 {currentRun && (

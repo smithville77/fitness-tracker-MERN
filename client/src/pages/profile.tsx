@@ -24,7 +24,7 @@ function Profile() {
 
   useEffect(() => {
     // Retrieve the access token from localStorage
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('token');
 
     // Make the GET request to your backend endpoint with the access token
     axios
