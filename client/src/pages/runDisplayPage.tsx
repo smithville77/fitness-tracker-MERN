@@ -9,7 +9,7 @@ function RunDisplayPage() {
   const [loading, setLoading] = useState(true);
   const [selectedRange, setSelectedRange] = useState(null);
   const accessToken = localStorage.getItem('token');
-  const [tcxLink, setTcxLink] = useState(null);
+  // const [tcxLink, setTcxLink] = useState("");
   const [token, setToken] = useState(accessToken);
 
 console.log(token)
@@ -34,9 +34,10 @@ console.log(token)
           const tcxResponse = response.data.runData[0].tcxLink;
           const userId = response.data.userId;
 
+          // setTcxLink(tcxResponse + "?includePartialTCX=true")
           // Replace the '-/' in the TCX link with the actual user ID
-          const updatedTcxLink = tcxResponse.replace(/\/user\/-/, `/user/${userId}`);
-          setTcxLink(updatedTcxLink);
+          // const updatedTcxLink = tcxResponse.replace(/\/user\/-/, `/user/${userId}`);
+          // setTcxLink(updatedTcxLink);
 
           setLoading(false);
         })
@@ -45,55 +46,9 @@ console.log(token)
           setLoading(false);
         });
     }
-  }, []); // Only trigger this on component mount
-  // console.log("Bearer " + accessToken)
-  // console.log("TcxLink:" + tcxLink)
-  // useEffect(() => {
-  //   if (token && tcxLink) {
-  //     // console.log(token)
-  //     axios
-  //       .get(tcxLink, {
-  //         headers: {
-  //           Authorization: "Bearer " + accessToken,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         console.log(response)
-  //         if (response.status === 200) {
-  //           return response.data;
-  //         }
-  //         // throw new Error(`HTTP error! Status: ${response.status}`);
-  //       })
-  //       .then((xmlData) => {
-  //         console.log(xmlData);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error:", error);
-  //       });
-  //   }
-  // }, [tcxLink]);
-  const makeTCXRequest = async () => {
-    try {
-        const response = await axios.get(tcxLink, {
-            headers: {
-                Authorization: 'Bearer ' + accessToken,
-            },
-        });
+  }, []); 
 
-        console.log(response);
-        if (response.status === 200) {
-            const xmlData = response.data;
-            console.log(xmlData);
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-};
-
-// Call the function directly
-makeTCXRequest();
   
-    
 
   const ranges = [
     { label: 'All Ranges', min: 0, max: 1000 }, 

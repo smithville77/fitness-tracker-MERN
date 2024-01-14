@@ -16,7 +16,7 @@ const RunEntry: React.FC<RunEntryProps> = ({ date, distance, speed }) => {
       </div>
       <div className="run-entry-bottom">
         <p>{distance} km</p>
-        <p>{speed}</p>
+        <p>Pace: {speed}</p>
       </div>
     </div>
   );
