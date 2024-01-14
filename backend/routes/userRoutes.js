@@ -1,22 +1,19 @@
-const express = require('express');
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const UserController = require('../controllers/userController.js');
-
-
+const UserController = require("../controllers/userController.js");
 
 //Post Method
-router.post('/newuser', UserController.createUser)
+router.post("/newuser", UserController.createUser);
 
 // //Get by username Method
-router.get('/getuser/:username', UserController.getUser)
+router.get("/getuser/:username", UserController.getUser);
 
 // Get user by ID method;
-router.get('/getuserID/:id', UserController.getUserByID)
+router.get("/getuserID/:id", UserController.getUserByID);
 
-
-// user login route 
-router.post('/login', UserController.userLogin)
+// user login route
+router.post("/login", UserController.userLogin);
 
 // //Update by ID Method
 // router.patch('/update/:id', (req, res) => {
@@ -27,6 +24,5 @@ router.post('/login', UserController.userLogin)
 // router.delete('/delete/:id', (req, res) => {
 //   res.send('Delete by ID API')
 // })
-
 
 module.exports = router;
