@@ -126,6 +126,8 @@ app.get('/auth/fitbit', cors(corsOptions), async (req, res, next) => {
   }
 });
 
+
+
 // Define a success route
 app.get('/success', (req, res) => {
   
@@ -140,7 +142,6 @@ app.get('/error', (req, res) => {
 });
 
 
-let accessToken;
 
 
 
@@ -148,7 +149,7 @@ let accessToken;
 
 
 let accessTokenPromise = null;
-
+let serverRefreshToken = null;
 app.get('/callback', async (req, res) => {
   console.log("Reached the /callback route");
   const { code } = req.query;
@@ -175,10 +176,11 @@ app.get('/callback', async (req, res) => {
     );
 
     const newAccessToken = tokenResponse.data.access_token;
-    const refreshToken = tokenResponse.data.refresh_token;
-    // localStorage.setItem('token', newAccessToken);
-    // 
-    
+    const newRefreshToken = tokenResponse.data.refresh_token;
+
+    // Save the refresh token on the server (in-memory storage for simplicity, consider a database for production)
+    serverRefreshToken = newRefreshToken;
+
     // Resolve the promise with the new access token before redirecting
     accessTokenPromise = Promise.resolve(newAccessToken);
 
@@ -186,11 +188,9 @@ app.get('/callback', async (req, res) => {
     res.redirect('/success');
   } catch (error) {
     console.error(error);
-    res.redirect('/error'); 
-  } 
+    res.redirect('/error');
+  }
 });
-
-
 
 
 app.get('/profile', async (req, res) => {
