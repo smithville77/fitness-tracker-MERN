@@ -47,14 +47,14 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
           
           {form === "signup" ? (
             <>
-            <p>Already a member? </p>
+            <p>Already a member? &nbsp; &nbsp;</p>
             <br />
-          <Button className="font-bold py-2 px-4 rounded bg-lime-400 hover:bg-lime-600" onClick={handleLoginFormClick}>Login</Button>
+          <Button className="font-bold py-2 px-4 rounded border-4 border-lime-500/75 bg-inherit hover:bg-lime-500" onClick={handleLoginFormClick}>Login</Button>
             </>
           ) : ( 
           <>
-          <p>Not a member? Sign up here</p>
-          <Button className="font-bold py-2 px-4 rounded bg-lime-400 hover:bg-lime-600" onClick={handleSignUpFormClick}>Signup</Button>
+          <p>Not a member? Sign up here &nbsp; &nbsp;</p>
+          <Button className="font-bold py-2 px-4 rounded border-4 border-lime-500/75 bg-inherit hover:bg-lime-500 " onClick={handleSignUpFormClick}>Signup</Button>
           </>
           )}
           

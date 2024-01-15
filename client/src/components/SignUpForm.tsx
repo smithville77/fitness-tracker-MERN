@@ -35,7 +35,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex '>
       
      
       <form className="w-full max-w-sm" onSubmit={handleSubmit}>
@@ -50,7 +50,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
           </div>
           <div className="md:w-2/3">
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-lime-500"
               id="inline-username"
               type="text"
               value={username}
@@ -70,7 +70,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
           </div>
           <div className="md:w-2/3">
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-lime-500"
               id="inline-password"
               type="password"
               placeholder="******************"
@@ -91,7 +91,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
           </div>
           <div className="md:w-2/3">
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-lime-500"
               id="inline-email"
               type="email"
               value={email}
@@ -111,7 +111,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
           </div>
           <div className="md:w-2/3">
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-lime-500"
               id="DOB"
               type="date"
               value={dateOfBirth}
@@ -131,7 +131,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
           </div>
           <div className="md:w-2/3">
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-lime-500"
               id="weight"
               type="number"
               value={weight}
@@ -151,7 +151,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
           </div>
           <div className="md:w-2/3">
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white focus:border-lime-500"
               id="height"
               type="number"
               value={height}
@@ -165,7 +165,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
           <div className="md:w-1/3"></div>
           <div className="md:w-2/3">
             <button
-              className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className="shadow bg-lime-500 hover:bg-lime-400 focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded shadow-xl"
               type="submit"
             >
               Sign Up
