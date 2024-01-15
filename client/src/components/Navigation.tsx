@@ -63,7 +63,7 @@ function Navigation() {
           </a>
         ) : (
 
-          <Link className={`py-2 px-4 mx-2 rounded cursor-pointer ${router.pathname === '/login' ? 'active' : ''}`} href="/login">
+          <Link className={`py-2 px-4 mx-2 rounded cursor-pointer ${router.pathname === '/login' ? 'active' : ''}`} href="/">
             Login
           </Link>
           
