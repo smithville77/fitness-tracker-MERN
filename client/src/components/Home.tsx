@@ -13,7 +13,7 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({}) => {
-  const [form, setForm] = useState("");
+  const [form, setForm] = useState("signup");
 
   const handleLoginFormClick = () => {
     setForm("login");
@@ -28,17 +28,38 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
       <section className="flex justify-center">
       <span
         id="main-home-container"
-        className="w-3/4 h-[100vh] flex flex-col text-white justify-center items-center"
+        className="w-1/4 h-[700px] mt-10 flex flex-col bg-white text-black bg-opacity-40 justify-between items-center p-5 rounded shadow-2xl"
       >
-        <h1>RunApp</h1>
-        <p>Welcome to the home page!</p>
-        <Button onClick={handleLoginFormClick}>Login</Button>
-        <Button onClick={handleSignUpFormClick}>Signup</Button>
+        <span className="flex flex-col items-center p-3">
+          <h1 className="text-4xl font-bold mb-3">Welcome to Dash Data</h1>
+          <p>Please login or signup to continue</p>
+        </span>
+        
+
+
+        
         {form === "login" ? (
           <LoginForm />
         ) : form === "signup" ? (
           <SignUpForm />
         ) : null}
+        <div id="sign-btn-container" className="p-3 w-full h1/4 flex justify-center items-center ">
+          
+          {form === "signup" ? (
+            <>
+            <p>Already a member? </p>
+            <br />
+          <Button className="font-bold py-2 px-4 rounded bg-lime-400 hover:bg-lime-600" onClick={handleLoginFormClick}>Login</Button>
+            </>
+          ) : ( 
+          <>
+          <p>Not a member? Sign up here</p>
+          <Button className="font-bold py-2 px-4 rounded bg-lime-400 hover:bg-lime-600" onClick={handleSignUpFormClick}>Signup</Button>
+          </>
+          )}
+          
+        </div>
+        
       </span>
       </section>
       
