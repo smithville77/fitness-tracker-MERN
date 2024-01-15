@@ -7,28 +7,22 @@ import SignUpForm from "@/components/SignUpForm";
 import { Button } from "react-bootstrap";
 import { useAuth } from "@/components/UseAuth";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 interface HomePageProps {}
 
-
-
 const HomePage: React.FC<HomePageProps> = ({}) => {
-
   const { authenticated, login } = useAuth();
-  const [form, setForm] = useState('signup');
+  const [form, setForm] = useState("signup");
   const [loading, setLoading] = useState(false); // Add loading state
 
   const handleLoginFormClick = () => {
-    setForm('login');
+    setForm("login");
   };
 
   const handleSignUpFormClick = () => {
-    setForm('signup');
+    setForm("signup");
   };
-
-
 
   return (
     <>
@@ -43,16 +37,16 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
               <p>Please login or signup to continue</p>
             </span>
 
-            {form === 'login' ? (
+            {form === "login" ? (
               <LoginForm onSuccess={() => setLoading(false)} />
-            ) : form === 'signup' ? (
+            ) : form === "signup" ? (
               <SignUpForm />
             ) : null}
             <div
               id="sign-btn-container"
               className="p-3 w-full h1/4 flex justify-center items-center "
             >
-              {form === 'signup' ? (
+              {form === "signup" ? (
                 <>
                   <p>Already a member? &nbsp; &nbsp;</p>
                   <br />
@@ -83,4 +77,3 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
 };
 
 export default HomePage;
-
