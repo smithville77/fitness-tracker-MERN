@@ -5,8 +5,8 @@ import Clock from "@/components/Clock";
 import RecentExercise from "@/components/RecentExercise";
 import ProfileSkeleton from "@/components/ProfileSkeleton";
 import { Card, AreaChart, Title, BarList, BarChart } from "@tremor/react";
-import { useAuth } from "../components/UseAuth"
-import { useRouter} from "next/router";
+import { useAuth } from "../components/UseAuth";
+import { useRouter } from "next/router";
 import { ProgressCircle } from "@tremor/react";
 
 import axios from "axios";
@@ -34,11 +34,8 @@ function Profile() {
       resetState();
       // logout();
     }
-
-    
   }, [authenticated, logout, router]);
-  
-  
+
   useEffect(() => {
     // Retrieve the access token from localStorage
     const accessToken = localStorage.getItem("token");
@@ -145,7 +142,6 @@ function Profile() {
   return (
     <div className="Profile">
       <Navigation />
-      
 
       {loading ? (
         <ProfileSkeleton />
