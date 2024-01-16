@@ -1,19 +1,18 @@
-// // useAuth.js
+// useAuth.js
 import { useState, useEffect } from 'react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 
 export function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    
+
     if (token) {
       setAuthenticated(true);
     } else {
       setAuthenticated(false);
     }
-    
   }, []);
 
   const login = async (username: string, password: string) => {
@@ -22,19 +21,19 @@ export function useAuth() {
         username,
         password,
       });
-      
+
       if (response.status === 200) {
         const token = response.data.token;
         const refreshToken = response.data.refreshToken;
         localStorage.setItem('token', token);
         localStorage.setItem('refresh_token', refreshToken);
-        console.log("Token:", token);
+        console.log('Token:', token);
         setAuthenticated(true); // Update the authentication state
       } else {
-        throw new Error("Login failed"); // Handle other status codes
+        throw new Error('Login failed'); // Handle other status codes
       }
     } catch (error) {
-      console.log("Login error:", error);
+      console.log('Login error:', error);
       // Handle errors here if needed
     }
   };
@@ -66,15 +65,17 @@ export function useAuth() {
       throw error;
     }
   };
-const logout = () => {
-    localStorage.removeItem('token');
+
+  const resetAuthState = () => {
     setAuthenticated(false);
-    console.log("logged out");
   };
 
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refresh_token');
+    resetAuthState(); // Call the function to reset the state
+    console.log('logged out');
+  };
 
-  return { authenticated, login, logout, setAuthenticated, refreshAccessToken };
-
-  
-
+  return { authenticated, login, logout, resetAuthState, refreshAccessToken };
 }

@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 import RunEntry from "@/components/individualRunEntry";
+import { useAuth } from "../components/UseAuth"
+import { useRouter} from "next/router";
 import axios from "axios";
 
 function RunDisplayPage() {
+  const { authenticated, logout, resetAuthState } = useAuth();
   const [runData, setRunData] = useState([]);
   const [currentRun, setCurrentRun] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedRange, setSelectedRange] = useState(null);
-  const accessToken = localStorage.getItem("token");
+  const accessToken = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
   // const [tcxLink, setTcxLink] = useState("");
+  const router = useRouter();
   const [token, setToken] = useState(accessToken);
+
+  
+  const handleLogout = () => {
+    resetAuthState();
+    setRunData([]);
+    setCurrentRun(null);
+    setSelectedRange(null);
+    logout()
+  }
+  useEffect(() => {
+    if (!authenticated) {
+      handleLogout();
+      // router.push('/');
+    }
+  }, [authenticated, router]);
 
   console.log(token);
   useEffect(() => {
