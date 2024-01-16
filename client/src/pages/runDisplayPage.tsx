@@ -6,7 +6,7 @@ import { useRouter} from "next/router";
 import axios from "axios";
 
 function RunDisplayPage() {
-  const { authenticated, logout, resetAuthState } = useAuth();
+  const { authenticated, logout } = useAuth();
   const [runData, setRunData] = useState([]);
   const [currentRun, setCurrentRun] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,18 +18,19 @@ function RunDisplayPage() {
 
   
   const handleLogout = () => {
-    resetAuthState();
     setRunData([]);
     setCurrentRun(null);
     setSelectedRange(null);
-    logout()
+
   }
   useEffect(() => {
     if (!authenticated) {
       handleLogout();
-      // router.push('/');
+      router.push('/');
     }
   }, [authenticated, router]);
+
+  
 
   console.log(token);
   useEffect(() => {

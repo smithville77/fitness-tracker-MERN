@@ -21,22 +21,22 @@ function Profile() {
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
-
-  const handleLogout = () => {
-    resetAuthState()
-    setProfileData(null);
-    setDashData(null);
-    setRecentExercise(null);
-    setRecentRuns(null);
-    setRecentSteps(null);
-    logout()
-  };
   useEffect(() => {
+    const resetState = () => {
+      setProfileData(null);
+      setDashData(null);
+      setRecentExercise(null);
+      setRecentRuns(null);
+      setRecentSteps(null);
+    };
+
     if (!authenticated) {
-      handleLogout();
-      // router.push('/');
+      resetState();
+      // logout();
     }
-  }, [authenticated, router]);
+
+    
+  }, [authenticated, logout, router]);
   
   
   useEffect(() => {

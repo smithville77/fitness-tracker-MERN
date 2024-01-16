@@ -1,23 +1,27 @@
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useAuth } from "../components/UseAuth";
 import FitbitAuthButton from './FitBitAuthBtn';
 import { useRouter } from 'next/router'; 
-import { useEffect } from "react";
 
 function Navigation() {
   const { authenticated, logout, setAuthenticated } = useAuth();
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
-  };
-
-  // // Check authentication status and redirect if necessary
   // useEffect(() => {
   //   if (!authenticated) {
   //     router.push('/');
   //   }
   // }, [authenticated, router]);
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   setAuthenticated(!!token);
+  // }, [setAuthenticated]);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <nav className="" id="navbar">
@@ -43,7 +47,7 @@ function Navigation() {
               Login
             </Link>
           )}
-        </div>
+       </div> 
       </div>
     </nav>
   );
