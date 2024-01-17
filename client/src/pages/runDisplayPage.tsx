@@ -108,123 +108,154 @@ function RunDisplayPage() {
 
   const filteredData = filterData();
 
-
   const handleSelectedRunStats = (selectedRun: any) => {
-  
-
     setCurrentRun(selectedRun);
-    console.log(selectedRun)
+    console.log(selectedRun);
   };
-  
+
   return (
-    
     <div className="run-display">
-  <Navigation />
-  {loading ? (
-    <RunDisplaySkeleton />
-  ) : filteredData.length > 0 ? (
-    <div id="run-display-grid-container">
-      <div id="display-container">
-        <div id="left-section" className="mr-5">
-          <div>
-            {filteredData.map((item, index) => (
-              <RunEntry
-                onClick={(runData) => handleSelectedRunStats(runData)}
-                key={index}
-                run={item}
-              />
-            ))}
+      <Navigation />
+      {loading ? (
+        <RunDisplaySkeleton />
+      ) : filteredData.length > 0 ? (
+        <div id="run-display-grid-container">
+          <div id="display-container">
+            <div id="left-section" className="mr-5">
+              <div>
+                {filteredData.map((item, index) => (
+                  <RunEntry
+                    onClick={(runData) => handleSelectedRunStats(runData)}
+                    key={index}
+                    run={item}
+                  />
+                ))}
+              </div>
+            </div>
+            <div id="depth-sidebar">
+              <div id="filter-data-section">
+                <div id="top-filter">
+                  <p>Recent runs total: {runData.length}</p>
+                  <p>
+                    Select range &nbsp;
+                    <select id="range-dropdown" onChange={handleRangeChange}>
+                      {ranges.map((range, index) => (
+                        <option key={index} value={index}>
+                          {range.label}
+                        </option>
+                      ))}
+                    </select>
+                  </p>
+                </div>
+                <div id="bottom-filter">
+                  <button
+                    className="border-solid border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600"
+                    id="speed-sort"
+                    onClick={filterBySpeedData}
+                  >
+                    Filter By Speed
+                  </button>
+                  <button
+                    className="border-solid border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600"
+                    id="distance-sort"
+                    onClick={filterByDistance}
+                  >
+                    Filter By Distance
+                  </button>
+                </div>
+              </div>
+              {currentRun && (
+                <div id="stats-container" className="grid grid-cols-2 gap-2">
+                  <span>
+                    <p>Run Stats</p>
+                  </span>
+                  <p className="stats-entry p-2 rounded">
+                    {new Date(currentRun.originalStartTime).toLocaleString(
+                      "en-GB",
+                      {
+                        day: "numeric",
+                        month: "numeric",
+                      }
+                    ) +
+                      " " +
+                      new Date(currentRun.originalStartTime).toLocaleString(
+                        "en-US",
+                        {
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: true,
+                        }
+                      )}
+                  </p>
+                  <p className="stats-entry p-2 rounded">
+                    Distance {parseInt(currentRun.distance).toFixed(2)}
+                  </p>
+                  <p className="stats-entry p-2 rounded">
+                    Heart Rate {currentRun.averageHeartRate}
+                  </p>
+                  <p className="stats-entry p-2 rounded">
+                    Svg Speed {currentRun.speed.toFixed(2)}
+                  </p>
+                  <p className="stats-entry p-2 rounded">
+                    {" "}
+                    Duration: {parseInt(currentRun.duration / 60000).toFixed(
+                      0
+                    )}{" "}
+                    minutes
+                  </p>
+                </div>
+              )}
+              {currentRun && (
+                <div
+                  id="weekly-goals-container"
+                  className="grid grid-cols-2 gap-2"
+                >
+                  <span>
+                    <p>Effect on your day</p>
+                  </span>
+                  <p className="stats-entry p-2 rounded">
+                    total zone minutes{" "}
+                    {currentRun.activeZoneMinutes.totalMinutes}
+                  </p>
+                  <p className="stats-entry p-2 rounded">
+                    Cals: {currentRun.calories}
+                  </p>
+                  <p className="stats-entry p-2 rounded">
+                    Floors: {currentRun.elevationGain}
+                  </p>
+                  <p className="stats-entry p-2 rounded">
+                    Steps:{currentRun.steps}
+                  </p>
+                </div>
+              )}
+              {currentRun && (
+                <div
+                  id="map-container"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <span>
+                    <p>Run Map</p>
+                  </span>
+                  <img
+                    src="/images/orange-world-map.svg.hi.png"
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <div id="depth-sidebar">
-          <div id="filter-data-section">
-            <div id="top-filter">
-              <p>Recent runs total: {runData.length}</p>
-              <p>
-                Select range &nbsp;
-                <select id="range-dropdown" onChange={handleRangeChange}>
-                  {ranges.map((range, index) => (
-                    <option key={index} value={index}>
-                      {range.label}
-                    </option>
-                  ))}
-                </select>
-              </p>
-            </div>
-            <div id="bottom-filter">
-              <button className="border-solid border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600" id="speed-sort" onClick={filterBySpeedData}>
-                Filter By Speed
-              </button>
-              <button className="border-solid border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600" id="distance-sort" onClick={filterByDistance}>
-                Filter By Distance
-              </button>
-            </div>
-          </div>
-          {currentRun && (
-            <div id="stats-container" className="grid grid-cols-2 gap-2">
-              <span>
-                <p>Run Stats</p>
-              </span>
-              <p className="stats-entry p-2 rounded">
-              {new Date(currentRun.originalStartTime).toLocaleString("en-GB", {
-                day: "numeric",
-                month: "numeric",
-              }) +
-                " " +
-                new Date(currentRun.originalStartTime).toLocaleString(
-                  "en-US",
-                  {
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
-                  }
-                )}
-</p>
-              <p className="stats-entry p-2 rounded">Distance {parseInt(currentRun.distance).toFixed(2)}</p>
-              <p className="stats-entry p-2 rounded">Heart Rate {currentRun.averageHeartRate}</p>
-              <p className="stats-entry p-2 rounded">Svg Speed {currentRun.speed.toFixed(2)}</p>
-              <p className="stats-entry p-2 rounded">
-                {" "}
-                Duration: {parseInt(currentRun.duration / 60000).toFixed(0)}{" "}
-                minutes
-              </p>
-            </div>
-          )}
-          {currentRun && (
-            <div id="weekly-goals-container" className="grid grid-cols-2 gap-2">
-              <span>
-                <p>Effect on your day</p>
-              </span>
-              <p className="stats-entry p-2 rounded">
-                total zone minutes {currentRun.activeZoneMinutes.totalMinutes}
-              </p>
-              <p className="stats-entry p-2 rounded">Cals: {currentRun.calories}</p>
-              <p className="stats-entry p-2 rounded">Floors: {currentRun.elevationGain}</p>
-              <p className="stats-entry p-2 rounded">Steps:{currentRun.steps}</p>
-            </div>
-          )}
-          {currentRun && (
-           <div id="map-container" style={{ width: '100%', height: '100%' }}>
-           <span>
-             <p>Run Map</p>
-           </span>
-           <img
-             src="/images/orange-world-map.svg.hi.png"
-             alt=""
-             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-           />
-         </div>
-         
-         
-          )}
-        </div>
-      </div>
+      ) : (
+        <p>No run data available for the selected range</p>
+      )}
+      <ScrollTop />
     </div>
-  ) : (
-    <p>No run data available for the selected range</p>
-  )}
-  <ScrollTop />
-</div>
-)}
+  );
+}
 
 export default RunDisplayPage;
