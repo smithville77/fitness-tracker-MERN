@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const authenticateUser = require("./middlewares/authMiddleware")
+
 const express = require("express");
 const axios = require("axios");
 const mongoose = require("mongoose");
@@ -180,7 +182,7 @@ app.get("/callback", async (req, res) => {
   }
 });
 
-app.get("/profile", async (req, res) => {
+app.get("/profile", authenticateUser, async (req, res) => {
   try {
     // Wait for the promise to resolve and get the access token
     const accessToken = await accessTokenPromise;
@@ -259,7 +261,7 @@ app.get("/profile", async (req, res) => {
   }
 });
 
-app.get("/runDisplayPage", async (req, res) => {
+app.get("/runDisplayPage", authenticateUser, async (req, res) => {
   try {
     // Wait for the promise to resolve and get the access token
     const accessToken = await accessTokenPromise;
