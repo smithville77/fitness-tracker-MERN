@@ -6,9 +6,10 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  
+
   /* Create a linear gradient with opacity */
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/images/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("/images/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -18,7 +19,7 @@ body {
 /* global-styles.css */
 body {
   scrollbar-width: thin;
-  scrollbar-color: #FF6700 rgb(3, 2, 0);
+  scrollbar-color: #ff6700 rgb(3, 2, 0);
 }
 
 /* For WebKit browsers (Chrome, Safari) */
@@ -31,7 +32,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #FF6700;
+  background-color: #ff6700;
   border-radius: 20px;
   border: 3px solid black;
 }
@@ -62,7 +63,7 @@ position: relative;
 #navbar {
   background-color: black;
   /* position: sticky; */
-  
+
   color: orange;
 }
 
@@ -82,12 +83,6 @@ position: relative;
   
 } */
 
-
-
-
-
-
-
 #welcome-text {
   font-size: 3rem;
 }
@@ -98,9 +93,9 @@ position: relative;
   justify-content: space-between;
   /* max-height: 100px; */
   width: auto;
-  background-color:#FF6700;
+  background-color: #ff6700;
   /* background-color: #84cc16; */
-  border:2px solid black;
+  border: 2px solid black;
   border-radius: 15px;
 }
 
@@ -151,12 +146,10 @@ position: relative;
   border: 2px solid lime;
   min-height: 200px;
   min-width: 200px;
-  flex: 1; 
+  flex: 1;
   border-radius: 15px;
   /* padding: 1rem; */
 }
-
-
 
 #grid-container {
   background-color: inherit;
@@ -164,13 +157,13 @@ position: relative;
   display: grid;
   gap: 1rem;
   grid-template-areas:
-    'greet greet greet greet sidebar'
-    'daily-data daily-data daily-data daily-data sidebar'
-    'daily-data daily-data daily-data daily-data sidebar'
-    'recent-data recent-data recent-data recent-data sidebar'
-    'recent-data recent-data recent-data recent-data sidebar';
+    "greet greet greet greet sidebar"
+    "daily-data daily-data daily-data daily-data sidebar"
+    "daily-data daily-data daily-data daily-data sidebar"
+    "recent-data recent-data recent-data recent-data sidebar"
+    "recent-data recent-data recent-data recent-data sidebar";
   width: 100%;
-  height: 80vh; 
+  height: 80vh;
   overflow: hidden;
 }
 
@@ -194,7 +187,7 @@ position: relative;
   top: -20px;
   display: flex;
   align-items: center;
-  z-index:2;
+  z-index: 2;
   background-color: #84cc16;
   border-radius: 10px;
   padding: 0.3rem;
@@ -203,8 +196,8 @@ position: relative;
 
 .recent-top {
   display: flex;
-  flex-direction: column; 
-  align-items: flex-start; 
+  flex-direction: column;
+  align-items: flex-start;
   position: relative;
 }
 
@@ -214,19 +207,16 @@ position: relative;
 }
 
 .recent-exercise-date {
-  align-self: flex-end; 
+  align-self: flex-end;
   font-size: smaller;
- color: grey;
+  color: grey;
 }
-
-
 
 /* Square component */
 
 .inner-square {
   display: flex;
   flex-direction: column;
-
 }
 .inner-square > p {
   padding: 1rem;
@@ -253,7 +243,7 @@ position: relative;
   justify-content: center;
   align-items: center;
   color: white;
-  
+
   /* padding: 1.5rem; */
 }
 
@@ -281,7 +271,7 @@ position: relative;
   padding-bottom: 2rem;
   height: 100%;
 }
-#outer-container > p{
+#outer-container > p {
   color: white;
   text-align: center;
 }
@@ -291,13 +281,11 @@ position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
-
 
 /* Clock start */
 
-.datetime{
+.datetime {
   color: #fff;
   background-color: rgb(87, 87, 87);
   font-family: "Segoe UI", sans-serif;
@@ -316,21 +304,21 @@ position: relative;
   box-shadow: 0 0 30px #2E94E3;
 } */
 
-.date{
+.date {
   font-size: 16px;
   font-weight: 400;
   text-align: center;
   letter-spacing: 3px;
 }
 
-.time{
+.time {
   font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.time span:not(:last-child){
+.time span:not(:last-child) {
   position: relative;
   margin: 0 6px;
   font-weight: 600;
@@ -338,8 +326,8 @@ position: relative;
   letter-spacing: 3px;
 }
 
-.time span:last-child{
-  background: #2E94E3;
+.time span:last-child {
+  background: #2e94e3;
   font-size: 30px;
   font-weight: 600;
   text-transform: uppercase;
@@ -356,15 +344,14 @@ position: relative;
   display: grid;
   gap: 1rem;
   grid-template-areas:
-    'greet greet greet greet sidebar'
-    'daily-data daily-data daily-data daily-data sidebar'
-    'daily-data daily-data daily-data daily-data sidebar'
-    'recent-data recent-data recent-data recent-data sidebar'
-    'recent-data recent-data recent-data recent-data sidebar';
+    "greet greet greet greet sidebar"
+    "daily-data daily-data daily-data daily-data sidebar"
+    "daily-data daily-data daily-data daily-data sidebar"
+    "recent-data recent-data recent-data recent-data sidebar"
+    "recent-data recent-data recent-data recent-data sidebar";
   width: 100%;
-  height: 80vh; 
+  height: 80vh;
   overflow: hidden;
- 
 }
 
 #greet-skeleton {
@@ -388,7 +375,6 @@ position: relative;
   flex-direction: row;
   gap: 1rem;
   flex-wrap: wrap;
-
 }
 
 .inner-square-skeleton {
@@ -400,7 +386,6 @@ position: relative;
   padding: 1rem;
   margin: 0 auto;
 } */
-
 
 #recent-data-skeleton {
   grid-area: recent-data;
@@ -418,7 +403,6 @@ position: relative;
   justify-content: center;
   align-items: center;
   color: white;
- 
 }
 
 #outer-container-skeleton {
@@ -439,7 +423,7 @@ position: relative;
 #sidebar-skeleton {
   grid-area: sidebar;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: space-between;
   background-color: inherit;
   color: white;
@@ -453,7 +437,7 @@ position: relative;
   padding: 0.5rem;
   margin: 0.5rem;
   color: white;
-  background-color:inherit;
+  background-color: inherit;
   border-radius: 15px;
   /* border: 2px solid black; */
   border: 2px solid lime;
@@ -469,13 +453,11 @@ position: relative;
   border: 2px solid black;
   min-height: 200px;
   min-width: 200px;
-  flex: 1; 
+  flex: 1;
   /* padding: 1rem; */
   border-radius: 15px;
-  border:2px solid lime;
+  border: 2px solid lime;
 }
-
-
 
 .shimmerBG {
   animation-duration: 2.2s;
@@ -484,11 +466,14 @@ position: relative;
   animation-name: shimmer;
   animation-timing-function: linear;
   background: #ddd;
-  background: linear-gradient(to right, rgb(0, 0, 0)8%, rgb(24, 46, 25) 18%, rgb(0, 0, 0) 33%);
+  background: linear-gradient(
+    to right,
+    rgb(0, 0, 0) 8%,
+    rgb(24, 46, 25) 18%,
+    rgb(0, 0, 0) 33%
+  );
   background-size: 1200px 100%;
 }
-
-
 
 @keyframes shimmer {
   0% {
@@ -500,10 +485,7 @@ position: relative;
   }
 }
 
-
 /* Run Entry page */
-
-
 
 .run-entry {
   display: flex;
@@ -532,7 +514,6 @@ position: relative;
 /* run display page */
 
 .run-display {
-  
 }
 
 /* #run-display-grid-container {
@@ -556,12 +537,11 @@ position: relative;
 #depth-sidebar {
   display: grid;
   grid-template-areas:
-    'filter-data-section filter-data-section'
-    'stats-container weekly-goals-container'
-    'stats-container weekly-goals-container'
-    'map-container map-container'
-    'map-container map-container'
-    ;
+    "filter-data-section filter-data-section"
+    "stats-container weekly-goals-container"
+    "stats-container weekly-goals-container"
+    "map-container map-container"
+    "map-container map-container";
   gap: 2rem;
 }
 
@@ -581,9 +561,7 @@ position: relative;
   grid-area: left-section;
   background-color: inherit;
   padding-top: 0rem;
-
 }
-
 
 #left-section > div > div:nth-child(1) {
   margin-top: 0;
@@ -594,19 +572,16 @@ position: relative;
   /* background-color: rgb(87, 87, 87); */
   position: sticky;
   top: 0;
-  height: 80vh; 
-  min-width: 700px; 
+  height: 80vh;
+  min-width: 700px;
 }
-
-
 
 #display-container {
   display: flex;
   justify-content: center;
- 
 }
 
-#filter-data-section{
+#filter-data-section {
   grid-area: filter-data-section;
   background-color: rgb(0 0 0 / 0.8);
   border-radius: 15px;
@@ -625,19 +600,18 @@ position: relative;
   color: black !important;
 }
 
-
-#top-filter, #bottom-filter {
+#top-filter,
+#bottom-filter {
   display: flex;
   justify-content: space-between;
 }
-
 
 #stats-container {
   grid-area: stats-container;
   padding: 1.5rem;
   font-weight: 700;
-  min-height: 200px; 
-  min-width: 200px;  
+  min-height: 200px;
+  min-width: 200px;
   background-color: rgb(0 0 0 / 0.8);
   border: 2px solid lime;
   color: white;
@@ -645,20 +619,20 @@ position: relative;
   border-radius: 15px;
   position: relative;
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
-
 }
 
 .stats-entry {
   border: 2px solid red;
-  
 }
 
-#stats-container > span, #weekly-goals-container > span, #map-container > span {
+#stats-container > span,
+#weekly-goals-container > span,
+#map-container > span {
   position: absolute;
   top: -20px;
   display: flex;
   align-items: center;
-  z-index:2;
+  z-index: 2;
   color: white;
   font-weight: normal;
   background-color: #84cc16;
@@ -679,8 +653,8 @@ position: relative;
   border-radius: 15px;
   padding: 1.5rem;
   position: relative;
-  min-height: 200px; 
-  min-width: 200px; 
+  min-height: 200px;
+  min-width: 200px;
   color: white;
   font-weight: 700;
   border: 2px solid lime;
@@ -695,21 +669,19 @@ position: relative;
   font-weight: 700;
   grid-area: weekly-goals-container;
   border-radius: 15px;
-  min-height: 200px; 
-  min-width: 200px;  
+  min-height: 200px;
+  min-width: 200px;
   border: 2px solid lime;
   background-color: rgb(0 0 0 / 0.8);
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
 
-
 /* Run display Skeleton */
 
 #run-display-grid-container-skeleton {
   display: flex;
-  grid-template-areas:
-    'left-section-skeleton depth-sidebar-skeleton';
-  grid-template-columns: 1fr 1fr; 
+  grid-template-areas: "left-section-skeleton depth-sidebar-skeleton";
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   gap: 1rem;
   /* width: 80%; */
@@ -717,22 +689,20 @@ position: relative;
   margin: 2rem;
 }
 
-
 #depth-sidebar-skeleton {
   display: grid;
   grid-template-areas:
-    'filter-data-section-skeleton filter-data-section-skeleton'
-    'stats-container-skeleton weekly-goals-container-skeleton'
-    'map-container-skeleton map-container-skeleton';
+    "filter-data-section-skeleton filter-data-section-skeleton"
+    "stats-container-skeleton weekly-goals-container-skeleton"
+    "map-container-skeleton map-container-skeleton";
   gap: 2rem;
 }
-
 
 #map-container-skeleton {
   grid-area: map-container-skeleton;
   position: relative;
-  min-height: 200px; 
-  min-width: 200px; 
+  min-height: 200px;
+  min-width: 200px;
   border: 2px solid lime;
   background-color: rgb(0 0 0 / 0.8);
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
@@ -740,25 +710,23 @@ position: relative;
 }
 
 #weekly-goals-container-skeleton {
-  
   position: relative;
- 
+
   grid-area: weekly-goals-container-skeleton;
   border-radius: 15px;
-  min-height: 200px; 
-  min-width: 200px;  
+  min-height: 200px;
+  min-width: 200px;
   border: 2px solid lime;
   background-color: rgb(0 0 0 / 0.8);
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
 
-#filter-data-section-skeleton{
+#filter-data-section-skeleton {
   grid-area: filter-data-section-skeleton;
-  
+
   border-radius: 15px;
 
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
-  
 
   margin-top: 20px;
   height: 200px;
@@ -770,8 +738,8 @@ position: relative;
 
 #stats-container-skeleton {
   grid-area: stats-container-skeleton;
-  min-height: 200px; 
-  min-width: 200px;  
+  min-height: 200px;
+  min-width: 200px;
   background-color: rgb(0 0 0 / 0.8);
   border: 2px solid lime;
   border-radius: 15px;
@@ -781,7 +749,7 @@ position: relative;
 
 #left-section-skeleton {
   grid-area: left-section-skeleton;
-  overflow-y: auto; 
+  overflow-y: auto;
   background-color: inherit;
   padding-top: 0rem;
 }
