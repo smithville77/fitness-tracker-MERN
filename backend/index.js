@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const authenticateUser = require("./middlewares/authMiddleware")
+const authenticateUser = require("./middlewares/authMiddleware");
 
 const express = require("express");
 const axios = require("axios");
@@ -333,6 +333,7 @@ app.get("/runDisplayPage", authenticateUser, async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
