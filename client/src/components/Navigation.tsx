@@ -24,7 +24,7 @@ function Navigation() {
   };
 
   return (
-    <nav className="" id="navbar">
+    <nav className="top-0 sticky z-30" id="navbar">
       <div className="container mx-auto flex justify-between items-center">
         <div className='flex container justify-end'>
           <Link className={`py-2 px-4 mx-2 rounded cursor-pointer ${router.pathname === '/profile' ? 'active' : ''}`} href="/profile">

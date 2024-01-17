@@ -15,7 +15,7 @@ function RunDisplaySkeleton() {
         </div>
         <div id="display-container-skeleton">
           <div id="depth-sidebar-skeleton">
-            <div id="filter-data-section-skeleton"></div>
+            <div id="filter-data-section-skeleton" className="shimmerBG"></div>
             <div id="stats-container-skeleton" className="shimmerBG"></div>
 
             <div

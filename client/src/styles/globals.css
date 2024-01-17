@@ -6,11 +6,40 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  
   /* Create a linear gradient with opacity */
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/images/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
+
+/* For all browsers */
+/* global-styles.css */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #FF6700 rgb(3, 2, 0);
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(3, 2, 0);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #FF6700;
+  border-radius: 20px;
+  border: 3px solid black;
+}
+
+#range-dropdown {
+  color: black;
+}
+
 /* Navbar start */
 /* #navbar {
  background-color:  rgb(87, 87, 87);
@@ -31,13 +60,15 @@ position: relative;
 } */
 
 #navbar {
-  background-color: inherit;
-  position: relative;
+  background-color: black;
+  /* position: sticky; */
+  
   color: orange;
 }
 
 #navbar > div {
   top: 20px;
+  height: 4rem;
 }
 
 /* .active {
@@ -548,9 +579,9 @@ position: relative;
 
 #left-section {
   grid-area: left-section;
-  overflow-y: auto; 
   background-color: inherit;
   padding-top: 0rem;
+
 }
 
 
@@ -591,7 +622,7 @@ position: relative;
 }
 
 #filter-data-section > select {
-  color: black;
+  color: black !important;
 }
 
 
@@ -614,6 +645,12 @@ position: relative;
   border-radius: 15px;
   position: relative;
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
+
+}
+
+.stats-entry {
+  border: 2px solid red;
+  
 }
 
 #stats-container > span, #weekly-goals-container > span, #map-container > span {

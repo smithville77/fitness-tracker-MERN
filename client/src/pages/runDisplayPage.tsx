@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 import RunEntry from "@/components/individualRunEntry";
 import RunDisplaySkeleton from "@/components/runDisplaySkeleton";
+import ScrollTop from "@/components/ScrollTop";
 import { useAuth } from "../components/UseAuth";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -109,7 +110,7 @@ function RunDisplayPage() {
 
 
   const handleSelectedRunStats = (selectedRun: any) => {
-    // Now selectedRun contains the entire run object
+  
 
     setCurrentRun(selectedRun);
     console.log(selectedRun)
@@ -124,7 +125,7 @@ function RunDisplayPage() {
   ) : filteredData.length > 0 ? (
     <div id="run-display-grid-container">
       <div id="display-container">
-        <div id="left-section">
+        <div id="left-section" className="mr-5">
           <div>
             {filteredData.map((item, index) => (
               <RunEntry
@@ -140,7 +141,7 @@ function RunDisplayPage() {
             <div id="top-filter">
               <p>Recent runs total: {runData.length}</p>
               <p>
-                Select range:
+                Select range &nbsp;
                 <select id="range-dropdown" onChange={handleRangeChange}>
                   {ranges.map((range, index) => (
                     <option key={index} value={index}>
@@ -151,19 +152,20 @@ function RunDisplayPage() {
               </p>
             </div>
             <div id="bottom-filter">
-              <button id="speed-sort" onClick={filterBySpeedData}>
+              <button className="border-solid border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600" id="speed-sort" onClick={filterBySpeedData}>
                 Filter By Speed
               </button>
-              <button id="distance-sort" onClick={filterByDistance}>
+              <button className="border-solid border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600" id="distance-sort" onClick={filterByDistance}>
                 Filter By Distance
               </button>
             </div>
           </div>
           {currentRun && (
-            <div id="stats-container">
+            <div id="stats-container" className="grid grid-cols-2 gap-2">
               <span>
                 <p>Run Stats</p>
               </span>
+              <p className="stats-entry p-2 rounded">
               {new Date(currentRun.originalStartTime).toLocaleString("en-GB", {
                 day: "numeric",
                 month: "numeric",
@@ -177,37 +179,43 @@ function RunDisplayPage() {
                     hour12: true,
                   }
                 )}
-
-              <p>distance {parseInt(currentRun.distance).toFixed(2)}</p>
-              <p>HR{currentRun.averageHeartRate}</p>
-              <p> avg Speed: {currentRun.speed.toFixed(2)}</p>
-              <p>
+</p>
+              <p className="stats-entry p-2 rounded">Distance {parseInt(currentRun.distance).toFixed(2)}</p>
+              <p className="stats-entry p-2 rounded">Heart Rate {currentRun.averageHeartRate}</p>
+              <p className="stats-entry p-2 rounded">Svg Speed {currentRun.speed.toFixed(2)}</p>
+              <p className="stats-entry p-2 rounded">
                 {" "}
-                duration: {parseInt(currentRun.duration / 60000).toFixed(0)}{" "}
+                Duration: {parseInt(currentRun.duration / 60000).toFixed(0)}{" "}
                 minutes
               </p>
             </div>
           )}
           {currentRun && (
-            <div id="weekly-goals-container">
+            <div id="weekly-goals-container" className="grid grid-cols-2 gap-2">
               <span>
                 <p>Effect on your day</p>
               </span>
-              <p>
+              <p className="stats-entry p-2 rounded">
                 total zone minutes {currentRun.activeZoneMinutes.totalMinutes}
               </p>
-              <p>Cals: {currentRun.calories}</p>
-              <p>Floors: {currentRun.elevationGain}</p>
-              <p>Steps:{currentRun.steps}</p>
+              <p className="stats-entry p-2 rounded">Cals: {currentRun.calories}</p>
+              <p className="stats-entry p-2 rounded">Floors: {currentRun.elevationGain}</p>
+              <p className="stats-entry p-2 rounded">Steps:{currentRun.steps}</p>
             </div>
           )}
           {currentRun && (
-            <div id="map-container">
-              <span>
-                <p>Run Map</p>
-              </span>
-              {/* Add the content for the Run Map */}
-            </div>
+           <div id="map-container" style={{ width: '100%', height: '100%' }}>
+           <span>
+             <p>Run Map</p>
+           </span>
+           <img
+             src="/images/orange-world-map.svg.hi.png"
+             alt=""
+             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+           />
+         </div>
+         
+         
           )}
         </div>
       </div>
@@ -215,6 +223,7 @@ function RunDisplayPage() {
   ) : (
     <p>No run data available for the selected range</p>
   )}
+  <ScrollTop />
 </div>
 )}
 
