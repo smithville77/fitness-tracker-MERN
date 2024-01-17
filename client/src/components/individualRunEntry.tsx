@@ -16,19 +16,16 @@ const RunEntry: React.FC<RunEntryProps> = ({ onClick, run }) => {
   return (
     <div className="run-entry" onClick={handleClick}>
       <div className="run-entry-top">
-      {
-                      new Date(originalStartTime).toLocaleString("en-GB", {
-                        day: "numeric",
-                        month: "numeric",
-                      }) +
-                      " " +
-                      new Date(originalStartTime).toLocaleString("en-US", {
-                        hour: "numeric",
-                        minute: "numeric",
-                        hour12: true,
-                      })
-                    }
-                    
+        {new Date(originalStartTime).toLocaleString("en-GB", {
+          day: "numeric",
+          month: "numeric",
+        }) +
+          " " +
+          new Date(originalStartTime).toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          })}
       </div>
       <div className="run-entry-bottom">
         <p>Distance: {parseFloat(distance).toFixed(2)}</p>
