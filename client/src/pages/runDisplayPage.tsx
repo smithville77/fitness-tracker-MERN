@@ -17,17 +17,16 @@ function RunDisplayPage() {
   const router = useRouter();
   const [token, setToken] = useState(accessToken);
 
-  const handleLogout = () => {
+  const resetState = () => {
     setRunData([]);
     setCurrentRun(null);
     setSelectedRange(null);
+    setLoading(true); // Reset loading state to true
   };
+
   useEffect(() => {
-    if (!authenticated) {
-      handleLogout();
-      router.push("/");
-    }
-  }, [authenticated, router]);
+    resetState(); // Call resetState when the component mounts
+  }, []);
 
   console.log(token);
   useEffect(() => {
@@ -107,6 +106,14 @@ function RunDisplayPage() {
 
   const filteredData = filterData();
 
+
+  const handleSelectedRunStats = (selectedRun: any) => {
+    // Now selectedRun contains the entire run object
+
+    setCurrentRun(selectedRun);
+    console.log(selectedRun)
+  };
+  
   return (
     <div className="run-display">
       <Navigation />
@@ -120,21 +127,10 @@ function RunDisplayPage() {
               <div>
                 {filteredData.map((item, index) => (
                   <RunEntry
+                  onClick={(runData) => handleSelectedRunStats(runData)}
                     key={index}
-                    date={
-                      new Date(item.originalStartTime).toLocaleString("en-GB", {
-                        day: "numeric",
-                        month: "numeric",
-                      }) +
-                      " " +
-                      new Date(item.originalStartTime).toLocaleString("en-US", {
-                        hour: "numeric",
-                        minute: "numeric",
-                        hour12: true,
-                      })
-                    }
-                    distance={parseFloat(item.distance).toFixed(2)}
-                    speed={parseFloat(item.speed).toFixed(2)}
+                    run={item}
+                  
                   />
                 ))}
               </div>

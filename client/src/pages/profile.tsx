@@ -20,21 +20,26 @@ function Profile() {
   const [recentSteps, setRecentSteps] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const router = useRouter();
-  useEffect(() => {
-    const resetState = () => {
-      setProfileData(null);
-      setDashData(null);
-      setRecentExercise(null);
-      setRecentRuns(null);
-      setRecentSteps(null);
-    };
+  const resetState = () => {
+    setProfileData(null);
+    setDashData(null);
+    setRecentExercise(null);
+    setRecentRuns(null);
+    setRecentSteps(null);
+    setLoading(true); // Reset loading state to true
+  };
 
-    if (!authenticated) {
-      resetState();
-      // logout();
-    }
-  }, [authenticated, logout, router]);
+  // const handleLogout = () => {
+  //   // Perform logout logic...
+  //   logout();
+
+  //   // Reset component-specific state
+  //   resetState();
+  // };
+
+  useEffect(() => {
+    resetState(); // Call resetState when the component mounts
+  }, []);
 
   useEffect(() => {
     // Retrieve the access token from localStorage
