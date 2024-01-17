@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "../components/Navigation";
-// import from '@/components/div';
-import Clock from "@/components/Clock";
-import RecentExercise from "@/components/RecentExercise";
-import { Card, AreaChart, Title, BarList, BarChart } from "@tremor/react";
 
-import { ProgressCircle } from "@tremor/react";
 
 function ProfileSkeleton() {
   return (

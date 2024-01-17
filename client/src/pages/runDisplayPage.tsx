@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 import RunEntry from "@/components/individualRunEntry";
+import RunDisplaySkeleton from "@/components/runDisplaySkeleton";
 import { useAuth } from "../components/UseAuth";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -115,113 +116,106 @@ function RunDisplayPage() {
   };
   
   return (
+    
     <div className="run-display">
-      <Navigation />
-
-      <div id="run-display-grid-container">
-        <div id="display-container">
-          <div id="left-section">
-            {loading ? (
-              <p>Loading run data...</p>
-            ) : filteredData.length > 0 ? (
-              <div>
-                {filteredData.map((item, index) => (
-                  <RunEntry
-                  onClick={(runData) => handleSelectedRunStats(runData)}
-                    key={index}
-                    run={item}
-                  
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No run data available for the selected range</p>
-            )}
+  <Navigation />
+  {loading ? (
+    <RunDisplaySkeleton />
+  ) : filteredData.length > 0 ? (
+    <div id="run-display-grid-container">
+      <div id="display-container">
+        <div id="left-section">
+          <div>
+            {filteredData.map((item, index) => (
+              <RunEntry
+                onClick={(runData) => handleSelectedRunStats(runData)}
+                key={index}
+                run={item}
+              />
+            ))}
           </div>
-          <div id="depth-sidebar">
-            <div id="filter-data-section">
-              <div id="top-filter">
-                <p>Recent runs total: {runData.length}</p>
-                <p>
-                  Select range:
-                  <select id="range-dropdown" onChange={handleRangeChange}>
-                    {ranges.map((range, index) => (
-                      <option key={index} value={index}>
-                        {range.label}
-                      </option>
-                    ))}
-                  </select>
-                </p>
-              </div>
-              <div id="bottom-filter">
-                <button id="speed-sort" onClick={filterBySpeedData}>
-                  Filter By Speed
-                </button>
-                <button id="distance-sort" onClick={filterByDistance}>
-                  Filter By Distance
-                </button>
-              </div>
+        </div>
+        <div id="depth-sidebar">
+          <div id="filter-data-section">
+            <div id="top-filter">
+              <p>Recent runs total: {runData.length}</p>
+              <p>
+                Select range:
+                <select id="range-dropdown" onChange={handleRangeChange}>
+                  {ranges.map((range, index) => (
+                    <option key={index} value={index}>
+                      {range.label}
+                    </option>
+                  ))}
+                </select>
+              </p>
             </div>
-            {currentRun && (
-              <div id="stats-container">
-                <span>
-                  <p>Run Stats</p>
-                </span>
-                {new Date(currentRun.originalStartTime).toLocaleString(
-                  "en-GB",
-                  {
-                    day: "numeric",
-                    month: "numeric",
-                  }
-                ) +
-                  " " +
-                  new Date(currentRun.originalStartTime).toLocaleString(
-                    "en-US",
-                    {
-                      hour: "numeric",
-                      minute: "numeric",
-                      hour12: true,
-                    }
-                  )}
-
-                <p>distance {parseInt(currentRun.distance).toFixed(2)}</p>
-                <p>HR{currentRun.averageHeartRate}</p>
-                <p> avg Speed: {currentRun.speed.toFixed(2)}</p>
-                <p>
-                  {" "}
-                  duration: {parseInt(currentRun.duration / 60000).toFixed(
-                    0
-                  )}{" "}
-                  minutes
-                </p>
-              </div>
-            )}
-            {currentRun && (
-              <div id="weekly-goals-container">
-                <span>
-                  <p>Effect on your day</p>
-                </span>
-                <p>
-                  total zone minutes {currentRun.activeZoneMinutes.totalMinutes}
-                </p>
-                <p>Cals: {currentRun.calories}</p>
-                <p>Floors: {currentRun.elevationGain}</p>
-                <p>Steps:{currentRun.steps}</p>
-              </div>
-            )}
-            {currentRun && (
-              <div id="map-container">
-                <span>
-                  <p>Run Map</p>
-                </span>
-                {/* Add the content for the Run Map */}
-              </div>
-            )}
+            <div id="bottom-filter">
+              <button id="speed-sort" onClick={filterBySpeedData}>
+                Filter By Speed
+              </button>
+              <button id="distance-sort" onClick={filterByDistance}>
+                Filter By Distance
+              </button>
+            </div>
           </div>
+          {currentRun && (
+            <div id="stats-container">
+              <span>
+                <p>Run Stats</p>
+              </span>
+              {new Date(currentRun.originalStartTime).toLocaleString("en-GB", {
+                day: "numeric",
+                month: "numeric",
+              }) +
+                " " +
+                new Date(currentRun.originalStartTime).toLocaleString(
+                  "en-US",
+                  {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  }
+                )}
+
+              <p>distance {parseInt(currentRun.distance).toFixed(2)}</p>
+              <p>HR{currentRun.averageHeartRate}</p>
+              <p> avg Speed: {currentRun.speed.toFixed(2)}</p>
+              <p>
+                {" "}
+                duration: {parseInt(currentRun.duration / 60000).toFixed(0)}{" "}
+                minutes
+              </p>
+            </div>
+          )}
+          {currentRun && (
+            <div id="weekly-goals-container">
+              <span>
+                <p>Effect on your day</p>
+              </span>
+              <p>
+                total zone minutes {currentRun.activeZoneMinutes.totalMinutes}
+              </p>
+              <p>Cals: {currentRun.calories}</p>
+              <p>Floors: {currentRun.elevationGain}</p>
+              <p>Steps:{currentRun.steps}</p>
+            </div>
+          )}
+          {currentRun && (
+            <div id="map-container">
+              <span>
+                <p>Run Map</p>
+              </span>
+              {/* Add the content for the Run Map */}
+            </div>
+          )}
         </div>
       </div>
     </div>
-  );
-}
+  ) : (
+    <p>No run data available for the selected range</p>
+  )}
+</div>
+)}
 
 export default RunDisplayPage;
