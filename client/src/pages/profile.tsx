@@ -29,13 +29,7 @@ function Profile() {
     setLoading(true); // Reset loading state to true
   };
 
-  // const handleLogout = () => {
-  //   // Perform logout logic...
-  //   logout();
 
-  //   // Reset component-specific state
-  //   resetState();
-  // };
 
   useEffect(() => {
     resetState(); // Call resetState when the component mounts
@@ -117,13 +111,13 @@ function Profile() {
     weeklyStepData = recentSteps["activities-steps"].map((item) => {
       const inputDate = new Date(item.dateTime);
 
-      // Define an array of day names
+    
       const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-      // Get the day of the week (0 = Sunday, 1 = Monday, etc.)
+     
       const dayIndex = inputDate.getDay();
 
-      // Get the short day name
+      
       const dayName = dayNames[dayIndex];
 
       return {
@@ -134,13 +128,13 @@ function Profile() {
   }
   const valueFormatter = (number) =>
     `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
-  // Now weeklyStepData contains the short day names
+ 
 
   let topBadges;
   if (profileData) {
     topBadges = profileData.user.topBadges;
   }
-  // Now you can use weeklyStepData for rendering or other purposes.
+
 
   console.log(totalDistance);
 
@@ -154,9 +148,9 @@ function Profile() {
         <div id="grid-container">
           <div id="greet">
             <div>
-              <h1 id="welcome-text">
-                Welcome, {profileData.user.displayName}!
-              </h1>
+              <h3 id="welcome-text">
+                Welcome, <strong>{profileData.user.displayName}</strong>!
+              </h3>
               <h3>Let's take a look at your day so far..</h3>
             </div>
             <span>
@@ -231,7 +225,7 @@ function Profile() {
             {/* <Card id="recent-runs" style={{ border: 'none', width: '100%', height: '100%' }}> */}
             <Square>
               <div id="recent-runs">
-                <Title className="graph-title">Recent Runs</Title>
+                <Title className="graph-title justify-center items-center">Recent Runs</Title>
                 <AreaChart
                   className="line-graph"
                   data={reducedData}
@@ -248,7 +242,7 @@ function Profile() {
             </Square>
 
             <Square>
-              <div id="recent-runs">
+              <div id="recent-steps">
                 <Title className="graph-title">Daily Steps - Past Week</Title>
                 <BarChart
                   className="h-72 mt-4"
