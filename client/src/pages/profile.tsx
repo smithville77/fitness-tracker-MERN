@@ -29,8 +29,6 @@ function Profile() {
     setLoading(true); // Reset loading state to true
   };
 
-
-
   useEffect(() => {
     resetState(); // Call resetState when the component mounts
   }, []);
@@ -111,13 +109,10 @@ function Profile() {
     weeklyStepData = recentSteps["activities-steps"].map((item) => {
       const inputDate = new Date(item.dateTime);
 
-    
       const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-     
       const dayIndex = inputDate.getDay();
 
-      
       const dayName = dayNames[dayIndex];
 
       return {
@@ -128,13 +123,11 @@ function Profile() {
   }
   const valueFormatter = (number) =>
     `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
- 
 
   let topBadges;
   if (profileData) {
     topBadges = profileData.user.topBadges;
   }
-
 
   console.log(totalDistance);
 
@@ -225,7 +218,9 @@ function Profile() {
             {/* <Card id="recent-runs" style={{ border: 'none', width: '100%', height: '100%' }}> */}
             <Square>
               <div id="recent-runs">
-                <Title className="graph-title justify-center items-center">Recent Runs</Title>
+                <Title className="graph-title justify-center items-center">
+                  Recent Runs
+                </Title>
                 <AreaChart
                   className="line-graph"
                   data={reducedData}
