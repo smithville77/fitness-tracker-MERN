@@ -194,7 +194,7 @@ function RunDisplayPage() {
                     Heart Rate {currentRun.averageHeartRate}
                   </p>
                   <p className="stats-entry p-2 rounded">
-                    Svg Speed {currentRun.speed.toFixed(2)}
+                    Avg Speed {currentRun.speed.toFixed(2)}
                   </p>
                   <p className="stats-entry p-2 rounded">
                     {" "}
