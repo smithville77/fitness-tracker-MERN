@@ -28,13 +28,13 @@ export function useAuth() {
         localStorage.setItem('token', token);
         localStorage.setItem('refresh_token', refreshToken);
         console.log('Token:', token);
-        setAuthenticated(true); // Update the authentication state
+        setAuthenticated(true);
       } else {
-        throw new Error('Login failed'); // Handle other status codes
+        throw new Error('Login failed'); codes
       }
     } catch (error) {
       console.log('Login error:', error);
-      // Handle errors here if needed
+     
     }
   };
 
