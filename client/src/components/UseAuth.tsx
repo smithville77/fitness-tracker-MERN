@@ -53,7 +53,7 @@ export function useAuth() {
       if (response.status === 200) {
         const newAccessToken = response.data.access_token;
 
-        // Update the locally stored access token with the new one
+        
         localStorage.setItem('token', newAccessToken);
 
         return newAccessToken;
