@@ -33,7 +33,7 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
         <section className="flex justify-center">
           <span
             id="main-home-container"
-            className="w-1/4 h-[700px] mt-10 flex flex-col bg-white text-black bg-opacity-40 justify-between items-center p-5 rounded shadow-2xl"
+            className="lg:w-1/2 xl:w-1/4 sm:w-1/2 h-fit mt-10 flex flex-col bg-white text-black bg-opacity-40 justify-between items-center p-5 rounded shadow-2xl"
           >
             <span className="flex flex-col items-center p-3">
               <h1 className="text-4xl font-bold mb-3">Welcome to Dash Data</h1>
@@ -54,7 +54,7 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
                   <p>Already a member? &nbsp; &nbsp;</p>
                   <br />
                   <Button
-                    className="font-bold py-2 px-4 rounded border-4 border-lime-500/75 bg-inherit hover:bg-lime-500"
+                    className="font-bold py-2 px-4 bg-inherit hover:text-lime-500"
                     onClick={handleLoginFormClick}
                   >
                     Login
@@ -62,9 +62,9 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
                 </>
               ) : (
                 <>
-                  <p>Not a member? Sign up here &nbsp; &nbsp;</p>
+                  <p>Not a member? Sign up here &nbsp;</p>
                   <Button
-                    className="font-bold py-2 px-4 rounded border-4 border-lime-500/75 bg-inherit hover:bg-lime-500 "
+                    className="font-bold py-2 px-4 bg-inherit hover:text-lime-500"
                     onClick={handleSignUpFormClick}
                   >
                     Signup
