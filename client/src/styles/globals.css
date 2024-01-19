@@ -7,7 +7,7 @@ body {
   padding: 0;
   height: 100vh;
 
-  /* Create a linear gradient with opacity */
+
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
     url("/images/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper.jpg");
   background-size: cover;
@@ -153,7 +153,7 @@ position: relative;
 
 #grid-container {
   background-color: inherit;
-  margin: 2rem;
+  /* margin: 2rem; */
   display: grid;
   gap: 1rem;
   overflow: auto;
@@ -173,8 +173,8 @@ position: relative;
 @media (max-width: 1024px) {
   #grid-container {
     overflow: auto;
-    margin: 2rem;
-    padding: 2rem;
+    /* margin: 2rem;
+    padding: 2rem; */
     height: 100%;
     grid-template-areas:
       "greet"
@@ -258,7 +258,6 @@ position: relative;
   border: none;
   text: white;
   border-radius: 0; */
-  color: white;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -430,6 +429,8 @@ position: relative;
   flex-wrap: wrap;
 }
 
+
+
 .recent-runs-skeleton {
   display: flex;
   flex-direction: column;
@@ -528,7 +529,7 @@ position: relative;
   font-weight: 600;
   flex-direction: column;
   justify-content: space-between;
-  width: 500px;
+  min-width: 300px;
   height: 80px;
   background-color: rgb(0 0 0);
   border: 2px solid lime;
@@ -582,12 +583,10 @@ position: relative;
 
 #run-display-grid-container {
   display: flex;
-  /* grid-template-areas:
-    'left-section depth-sidebar';
-  grid-template-columns: 1fr 1fr;  */
+
   justify-content: center;
   gap: 1rem;
-  /* width: 80%; */
+
   height: 100%;
   margin: 2rem;
 }
@@ -596,6 +595,43 @@ position: relative;
   grid-area: left-section;
   background-color: inherit;
   padding-top: 0rem;
+}
+#display-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  #display-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+  
+    height: 100%;
+   
+  }
+  #depth-sidebar {
+    gap: 1rem;
+    position: fixed;
+    width: 100%;
+    height: 40vh;
+    height: fit-content;
+    background-color: rgb(0 0 0);
+    border-bottom: 1px sold lime;
+  }
+}
+@media (min-width: 1025px) {
+ 
+  #depth-sidebar {
+    gap: 1rem;
+    position: fixed;
+    width: 100%;
+    height: 80vh;
+    height: fit-content;
+    background-color: rgb(0 0 0);
+    border-bottom: 1px sold lime;
+  }
 }
 
 #left-section > div > div:nth-child(1) {
@@ -606,15 +642,11 @@ position: relative;
   grid-area: depth-sidebar;
   /* background-color: rgb(87, 87, 87); */
   position: sticky;
-  top: 0;
-  height: 80vh;
-  min-width: 700px;
+  top: 4rem;
+
+
 }
 
-#display-container {
-  display: flex;
-  justify-content: center;
-}
 
 #filter-data-section {
   grid-area: filter-data-section;
@@ -658,6 +690,10 @@ position: relative;
 
 .stats-entry {
   border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #stats-container > span,

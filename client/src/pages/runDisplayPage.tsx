@@ -121,17 +121,7 @@ function RunDisplayPage() {
       ) : filteredData.length > 0 ? (
         <div id="run-display-grid-container">
           <div id="display-container">
-            <div id="left-section" className="mr-5">
-              <div>
-                {filteredData.map((item, index) => (
-                  <RunEntry
-                    onClick={(runData) => handleSelectedRunStats(runData)}
-                    key={index}
-                    run={item}
-                  />
-                ))}
-              </div>
-            </div>
+            
             <div id="depth-sidebar">
               <div id="filter-data-section">
                 <div id="top-filter">
@@ -169,8 +159,10 @@ function RunDisplayPage() {
                   <span>
                     <p>Run Stats</p>
                   </span>
+                 
                   <p className="stats-entry p-2 rounded">
-                    {new Date(currentRun.originalStartTime).toLocaleString(
+                     <h5>Date:</h5>
+                     <p>{new Date(currentRun.originalStartTime).toLocaleString(
                       "en-GB",
                       {
                         day: "numeric",
@@ -186,21 +178,22 @@ function RunDisplayPage() {
                           hour12: true,
                         }
                       )}
+                      </p>
                   </p>
                   <p className="stats-entry p-2 rounded">
-                    Distance {parseInt(currentRun.distance).toFixed(2)}
+                    <h5>Distance</h5><p>{parseInt(currentRun.distance).toFixed(2)}</p>
                   </p>
                   <p className="stats-entry p-2 rounded">
-                    Heart Rate {currentRun.averageHeartRate}
+                    <h5>Heart Rate</h5> <p> {currentRun.averageHeartRate}</p>
                   </p>
                   <p className="stats-entry p-2 rounded">
-                    Avg Speed {currentRun.speed.toFixed(2)}
+                    <h5>Avg Speed</h5> <p>{currentRun.speed.toFixed(2)}</p>
                   </p>
                   <p className="stats-entry p-2 rounded">
                     {" "}
-                    Duration: {parseInt(currentRun.duration / 60000).toFixed(
+                    <h5>Duration</h5> <p>{parseInt(currentRun.duration / 60000).toFixed(
                       0
-                    )}{" "}
+                    )}{" "}</p>
                     minutes
                   </p>
                 </div>
@@ -214,23 +207,24 @@ function RunDisplayPage() {
                     <p>Effect on your day</p>
                   </span>
                   <p className="stats-entry p-2 rounded">
-                    total zone minutes{" "}
-                    {currentRun.activeZoneMinutes.totalMinutes}
+                    <h5>total zone minutes{" "}</h5>
+                    <p>{currentRun.activeZoneMinutes.totalMinutes}</p>
                   </p>
                   <p className="stats-entry p-2 rounded">
-                    Cals: {currentRun.calories}
+                    <h5>Calories:</h5> <p>{currentRun.calories}</p>
                   </p>
                   <p className="stats-entry p-2 rounded">
-                    Floors: {currentRun.elevationGain}
+                    <h5>Floors: </h5> <p>{currentRun.elevationGain}</p>
                   </p>
                   <p className="stats-entry p-2 rounded">
-                    Steps:{currentRun.steps}
+                    <h5>Steps:</h5> <p>{currentRun.steps}</p>
                   </p>
                 </div>
               )}
               {currentRun && (
                 <div
                   id="map-container"
+                  className="hidden lg:flex"
                   style={{ width: "100%", height: "100%" }}
                 >
                   <span>
@@ -247,6 +241,17 @@ function RunDisplayPage() {
                   />
                 </div>
               )}
+            </div>
+            <div id="left-section" className="mr-5">
+              <div>
+                {filteredData.map((item, index) => (
+                  <RunEntry
+                    onClick={(runData) => handleSelectedRunStats(runData)}
+                    key={index}
+                    run={item}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
