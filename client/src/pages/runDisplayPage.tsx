@@ -121,7 +121,6 @@ function RunDisplayPage() {
       ) : filteredData.length > 0 ? (
         <div id="run-display-grid-container">
           <div id="display-container">
-            
             <div id="depth-sidebar">
               <div id="filter-data-section">
                 <div id="top-filter">
@@ -159,29 +158,31 @@ function RunDisplayPage() {
                   <span>
                     <p>Run Stats</p>
                   </span>
-                 
+
                   <p className="stats-entry p-2 rounded">
-                     <h5>Date:</h5>
-                     <p>{new Date(currentRun.originalStartTime).toLocaleString(
-                      "en-GB",
-                      {
-                        day: "numeric",
-                        month: "numeric",
-                      }
-                    ) +
-                      " " +
-                      new Date(currentRun.originalStartTime).toLocaleString(
-                        "en-US",
+                    <h5>Date:</h5>
+                    <p>
+                      {new Date(currentRun.originalStartTime).toLocaleString(
+                        "en-GB",
                         {
-                          hour: "numeric",
-                          minute: "numeric",
-                          hour12: true,
+                          day: "numeric",
+                          month: "numeric",
                         }
-                      )}
-                      </p>
+                      ) +
+                        " " +
+                        new Date(currentRun.originalStartTime).toLocaleString(
+                          "en-US",
+                          {
+                            hour: "numeric",
+                            minute: "numeric",
+                            hour12: true,
+                          }
+                        )}
+                    </p>
                   </p>
                   <p className="stats-entry p-2 rounded">
-                    <h5>Distance</h5><p>{parseInt(currentRun.distance).toFixed(2)}</p>
+                    <h5>Distance</h5>
+                    <p>{parseInt(currentRun.distance).toFixed(2)}</p>
                   </p>
                   <p className="stats-entry p-2 rounded">
                     <h5>Heart Rate</h5> <p> {currentRun.averageHeartRate}</p>
@@ -191,9 +192,8 @@ function RunDisplayPage() {
                   </p>
                   <p className="stats-entry p-2 rounded">
                     {" "}
-                    <h5>Duration</h5> <p>{parseInt(currentRun.duration / 60000).toFixed(
-                      0
-                    )}{" "}</p>
+                    <h5>Duration</h5>{" "}
+                    <p>{parseInt(currentRun.duration / 60000).toFixed(0)} </p>
                     minutes
                   </p>
                 </div>
@@ -207,7 +207,7 @@ function RunDisplayPage() {
                     <p>Effect on your day</p>
                   </span>
                   <p className="stats-entry p-2 rounded">
-                    <h5>total zone minutes{" "}</h5>
+                    <h5>total zone minutes </h5>
                     <p>{currentRun.activeZoneMinutes.totalMinutes}</p>
                   </p>
                   <p className="stats-entry p-2 rounded">
