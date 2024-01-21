@@ -23,11 +23,11 @@ function RunDisplayPage() {
     setRunData([]);
     setCurrentRun(null);
     setSelectedRange(null);
-    setLoading(true); // Reset loading state to true
+    setLoading(true);
   };
 
   useEffect(() => {
-    resetState(); // Call resetState when the component mounts
+    resetState(); 
   }, []);
 
   console.log(token);
@@ -35,7 +35,6 @@ function RunDisplayPage() {
     if (token) {
       // setToken(accessToken);
 
-      // Make the GET request to your backend endpoint with the access token
       axios
         .get("http://localhost:3001/runDisplayPage", {
           headers: {
