@@ -27,7 +27,7 @@ function RunDisplayPage() {
   };
 
   useEffect(() => {
-    resetState(); 
+    resetState();
   }, []);
 
   console.log(token);
