@@ -17,7 +17,7 @@ function LoginPage() {
 
   return (
     <div>
-      {/* Display navigation or header if needed */}
+     
       <Navigation />
 
       <h1 className="flex justify-center mt-5">Create Run Page</h1>
@@ -25,7 +25,7 @@ function LoginPage() {
       {authenticated ? (
         <CreateRunForm />
       ) : (
-        // Render the login form 
+     
         <LoginForm onSuccess={login} />
       )}
     </div>
