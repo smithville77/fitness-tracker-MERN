@@ -8,19 +8,19 @@ import Navigation from "@/components/Navigation";
 
 function LoginPage() {
   const { authenticated, login } = useAuth();
-  const [form, setForm] = useState('login');
+  const [form, setForm] = useState("login");
 
   const handleLoginFormClick = () => {
-    setForm('login');
+    setForm("login");
   };
 
   const handleSignUpFormClick = () => {
-    setForm('signup');
+    setForm("signup");
   };
 
   const handleLoginSuccess = () => {
-    login(); // Update the authentication state
-    window.location.reload(); // Reload the page after successful login
+    login();
+    window.location.reload();
   };
 
   return (
@@ -37,20 +37,22 @@ function LoginPage() {
               className="w-1/4 h-[700px] mt-10 flex flex-col bg-white text-black bg-opacity-40 justify-between items-center p-5 rounded shadow-2xl"
             >
               <span className="flex flex-col items-center p-3">
-                <h1 className="text-4xl font-bold mb-3">Welcome to Dash Data</h1>
+                <h1 className="text-4xl font-bold mb-3">
+                  Welcome to Dash Data
+                </h1>
                 <p>Please login or signup to continue</p>
               </span>
 
-              {form === 'login' ? (
+              {form === "login" ? (
                 <LoginForm onSuccess={handleLoginSuccess} />
-              ) : form === 'signup' ? (
+              ) : form === "signup" ? (
                 <SignUpForm />
               ) : null}
               <div
                 id="sign-btn-container"
                 className="p-3 w-full h1/4 flex justify-center items-center "
               >
-                {form === 'signup' ? (
+                {form === "signup" ? (
                   <>
                     <p>Already a member? &nbsp; &nbsp;</p>
                     <br />
