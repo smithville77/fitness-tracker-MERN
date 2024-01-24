@@ -246,7 +246,6 @@ function Profile() {
                   categories={["steps"]}
                   colors={["blue"]}
                   yAxisWidth={30}
-                  // customTooltip={customTooltip}
                 />
               </div>
             </Square>

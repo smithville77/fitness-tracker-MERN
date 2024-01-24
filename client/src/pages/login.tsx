@@ -29,7 +29,7 @@ function LoginPage() {
       {authenticated ? (
         <Profile />
       ) : (
-        // Render the login form
+      
         <Fragment>
           <section className="flex justify-center">
             <span
