@@ -6,8 +6,7 @@ interface RunEntryProps {
 }
 
 const RunEntry: React.FC<RunEntryProps> = ({ onClick, run }) => {
-  const { originalStartTime, distance, speed } = run; // Destructure date, distance, and speed from run
-
+  const { originalStartTime, distance, speed } = run; 
   const handleClick = () => {
     // Call the passed-in onClick handler with the entire run object
     onClick(run);
