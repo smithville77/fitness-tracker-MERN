@@ -79,7 +79,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
             />
           </div>
         </div>
-        {/* Email */}
+       
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label
