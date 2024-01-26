@@ -290,7 +290,7 @@ function Profile() {
           </div>
         </div>
       ) : (
-        <p>No profile data available</p>
+        <p>Profile Data is unavailable, try authenticating with FitBit</p>
       )}
     </div>
   );
