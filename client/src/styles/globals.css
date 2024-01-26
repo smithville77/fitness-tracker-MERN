@@ -40,24 +40,6 @@ body::-webkit-scrollbar-thumb {
   color: black;
 }
 
-/* Navbar start */
-/* #navbar {
- background-color:  rgb(87, 87, 87);
-position: relative;
-}
-
-.active {
-  border-bottom: 2px solid orange;
-  height: 100%;
-  background-color: orange;
-  color: white;
-  z-index: 3;
-  height: 80px;
-  padding-bottom: 40px;
-  position: absolute;
-  animiation-name: active;
-  animation-duration: 2s;
-} */
 
 #navbar {
   background-color: black;
@@ -71,16 +53,7 @@ position: relative;
   height: 4rem;
 }
 
-/* .active {
-  background-color: orange;
-  color: white;
-  z-index: 3;
-  height: 80px; 
-  padding-bottom: 0; 
-  top: 20px; 
-  position: fixed;
-  
-} */
+
 
 #welcome-text {
   font-size: 2rem;
