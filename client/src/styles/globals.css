@@ -337,11 +337,11 @@ body::-webkit-scrollbar-thumb {
   display: grid;
   gap: 1rem;
   grid-template-areas:
-    "greet greet greet greet sidebar"
-    "daily-data daily-data daily-data daily-data sidebar"
-    "daily-data daily-data daily-data daily-data sidebar"
-    "recent-data recent-data recent-data recent-data sidebar"
-    "recent-data recent-data recent-data recent-data sidebar";
+    "greet-skeleton greet-skeleton greet-skeleton greet-skeleton sidebar-skeleton"
+    "daily-data-skeleton daily-data-skeleton daily-data-skeleton daily-data-skeleton sidebar-skeleton"
+    "daily-data-skeleton daily-data-skeleton daily-data-skeleton daily-data-skeleton sidebar-skeleton"
+    "recent-data-skeleton recent-data-skeleton recent-data-skeleton recent-data-skeleton sidebar-skeleton"
+    "recent-data-skeleton recent-data-skeleton recent-data-skeleton recent-data-skeleton sidebar-skeleton";
   width: 100%;
   height: 80vh;
   overflow: hidden;
