@@ -230,7 +230,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #recent-runs {
-
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -461,7 +460,6 @@ body::-webkit-scrollbar-thumb {
   flex: 1;
   /* padding: 1rem; */
   border-radius: 5px;
-
 }
 
 .shimmerBG {
@@ -763,9 +761,9 @@ body::-webkit-scrollbar-thumb {
   border-radius: 5px;
   min-height: 200px;
   min-width: 200px;
-  border: 2px solid lime;
+  /* border: 2px solid lime; */
   background-color: rgb(0 0 0 / 0.8);
-  box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
+  box-shadow: 0 5px 6px rgb(0 0 0 / 0.8);
 }
 
 #filter-data-section-skeleton {
@@ -773,12 +771,12 @@ body::-webkit-scrollbar-thumb {
 
   border-radius: 5px;
 
-  box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
+  box-shadow: 0 5px 6px rgb(0 0 0 / 0.8);
 
   margin-top: 20px;
   height: 200px;
   width: 100%;
-  border: 2px solid lime;
+  /* border: 2px solid lime; */
   width: 100%;
   max-height: 100px;
 }
@@ -787,11 +785,11 @@ body::-webkit-scrollbar-thumb {
   grid-area: stats-container-skeleton;
   min-height: 200px;
   min-width: 200px;
-  background-color: rgb(0 0 0 / 0.8);
-  border: 2px solid lime;
+  background-color: rgb(223, 223, 223);
+  /* border: 2px solid lime; */
   border-radius: 5px;
   position: relative;
-  box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
+  box-shadow: 0 5px 6px rgb(0 0 0 / 0.8);
 }
 
 #left-section-skeleton {
