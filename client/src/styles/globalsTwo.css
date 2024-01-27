@@ -42,7 +42,7 @@ body::-webkit-scrollbar-thumb {
 
 #navbar {
   background-color: #3e88f8;
-
+  margin-bottom: 1rem;
   color: black;
   font-weight: 500;
 }
@@ -80,7 +80,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .active {
-  border-bottom: 5px solid rgb(41, 27, 236);
+  /* border-bottom: 5px solid rgb(41, 27, 236); */
+  background-color: #0043a8;
   color: white;
 }
 
@@ -520,6 +521,10 @@ body::-webkit-scrollbar-thumb {
 .run-display {
 }
 
+#scroll-top {
+  background-color: #3472f8;
+  color: white;
+}
 /* #run-display-grid-container {
   background-color: rgb(46, 46, 46);
   overflow-y: scroll;
@@ -603,12 +608,12 @@ body::-webkit-scrollbar-thumb {
 }
 @media (min-width: 1025px) {
   #depth-sidebar {
-    gap: 1rem;
+    gap: 2rem;
     position: fixed;
     width: 100%;
     height: 80vh;
     height: fit-content;
-    background-color: rgb(0 0 0);
+    background-color: inherit;
     border-bottom: 1px sold lime;
   }
 }
@@ -626,7 +631,7 @@ body::-webkit-scrollbar-thumb {
 
 #filter-data-section {
   grid-area: filter-data-section;
-  background-color: rgb(0 0 0 / 0.8);
+  background-color: rgb(223, 223, 223);
   border-radius: 5px;
   padding: 1.5rem;
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
@@ -634,7 +639,6 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border: 2px solid lime;
   width: 100%;
   max-height: 100px;
 }
@@ -655,8 +659,7 @@ body::-webkit-scrollbar-thumb {
   font-weight: 700;
   min-height: 200px;
   min-width: 200px;
-  background-color: rgb(0 0 0 / 0.8);
-  border: 2px solid lime;
+  background-color: rgb(223, 223, 223);
   color: white;
   font-weight: 700;
   border-radius: 5px;
@@ -704,8 +707,7 @@ body::-webkit-scrollbar-thumb {
   min-width: 200px;
   color: white;
   font-weight: 700;
-  border: 2px solid lime;
-  background-color: rgb(0 0 0 / 0.8);
+  background-color: rgb(223, 223, 223);
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
 
@@ -718,8 +720,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 5px;
   min-height: 200px;
   min-width: 200px;
-  border: 2px solid lime;
-  background-color: rgb(0 0 0 / 0.8);
+  background-color: rgb(223, 223, 223);
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
 
@@ -750,8 +751,7 @@ body::-webkit-scrollbar-thumb {
   position: relative;
   min-height: 200px;
   min-width: 200px;
-  border: 2px solid lime;
-  background-color: rgb(0 0 0 / 0.8);
+  background-color: rgb(223, 223, 223);
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
   border-radius: 5px;
 }
