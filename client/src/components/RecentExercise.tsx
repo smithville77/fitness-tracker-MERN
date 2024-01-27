@@ -30,7 +30,7 @@ const RecentExercise: React.FC<RecentExerciseProps> = ({ name, length, date, cal
   const exerciseIcon = exerciseIcons[name] || exerciseIcons.Default;
 
   return (
-    <Card className="max-w-xs mx-auto exercise-card" decoration="bottom" decorationColor="indigo">
+    <Card className="max-w-xs mx-auto exercise-card" >
     <div className="recent-exercise">
       <div className="recent-top">
         <div className="exercise-name-icon">

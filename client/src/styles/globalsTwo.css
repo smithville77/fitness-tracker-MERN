@@ -18,22 +18,22 @@ body {
 /* global-styles.css */
 body {
   scrollbar-width: thin;
-  scrollbar-color: #ff6700 rgb(3, 2, 0);
+  scrollbar-color: #0051ff rgb(3, 2, 0);
 }
 
 /* For WebKit browsers (Chrome, Safari) */
 body::-webkit-scrollbar {
-  width: 12px;
+  width: 16px;
 }
 
 body::-webkit-scrollbar-track {
-  background: rgb(3, 2, 0);
+  background: rgb(206, 204, 204);
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #ff6700;
+  background-color: #3472f8;
   border-radius: 20px;
-  border: 3px solid black;
+  border: 3px solid rgb(206, 204, 204);
 }
 
 #range-dropdown {
@@ -41,7 +41,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #navbar {
-  background-color: inherit;
+  background-color: white;
 
   color: black;
   font-weight: 700;
@@ -62,7 +62,7 @@ body::-webkit-scrollbar-thumb {
   justify-content: space-between;
   /* max-height: 100px; */
   width: auto;
-  background-color: #0968f7;
+  background-color: #3e88f8;
   /* background-color: #84cc16; */
   /* border: 2px solid black; */
   border-radius: 5px;
@@ -164,7 +164,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .exercise-card {
-  box-shadow: 0 6px 10px rgb(0 0 0 / 0.8);
+  border-bottom: 5px solid rgb(36, 106, 236);
+  box-shadow: 0 2px 2px rgb(0 0 0 / 0.6);
+  border-radius: 5px;
 }
 
 .time-container {
@@ -179,7 +181,7 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   z-index: 2;
   background-color: #84cc16;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 0.3rem;
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
@@ -363,7 +365,7 @@ body::-webkit-scrollbar-thumb {
   opacity: 0.6;
   /* background-color: #84cc16; */
   /* border:2px solid black */
-  border-radius: 15px;
+  border-radius: 5px;
   border: 2px solid lime;
 }
 
@@ -436,7 +438,7 @@ body::-webkit-scrollbar-thumb {
   margin: 0.5rem;
   color: white;
   background-color: inherit;
-  border-radius: 15px;
+  border-radius: 5px;
   /* border: 2px solid black; */
   border: 2px solid lime;
 }
@@ -453,7 +455,7 @@ body::-webkit-scrollbar-thumb {
   min-width: 200px;
   flex: 1;
   /* padding: 1rem; */
-  border-radius: 15px;
+  border-radius: 5px;
   border: 2px solid lime;
 }
 
@@ -496,7 +498,7 @@ body::-webkit-scrollbar-thumb {
   background-color: rgb(0 0 0);
   border: 2px solid lime;
   margin: 20px;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 10px;
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
@@ -621,7 +623,7 @@ body::-webkit-scrollbar-thumb {
 #filter-data-section {
   grid-area: filter-data-section;
   background-color: rgb(0 0 0 / 0.8);
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 1.5rem;
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
   color: white;
@@ -653,7 +655,7 @@ body::-webkit-scrollbar-thumb {
   border: 2px solid lime;
   color: white;
   font-weight: 700;
-  border-radius: 15px;
+  border-radius: 5px;
   position: relative;
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
@@ -691,7 +693,7 @@ body::-webkit-scrollbar-thumb {
 
 #map-container {
   grid-area: map-container;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 1.5rem;
   position: relative;
   min-height: 200px;
@@ -709,7 +711,7 @@ body::-webkit-scrollbar-thumb {
   color: white;
   font-weight: 700;
   grid-area: weekly-goals-container;
-  border-radius: 15px;
+  border-radius: 5px;
   min-height: 200px;
   min-width: 200px;
   border: 2px solid lime;
@@ -747,14 +749,14 @@ body::-webkit-scrollbar-thumb {
   border: 2px solid lime;
   background-color: rgb(0 0 0 / 0.8);
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 #weekly-goals-container-skeleton {
   position: relative;
 
   grid-area: weekly-goals-container-skeleton;
-  border-radius: 15px;
+  border-radius: 5px;
   min-height: 200px;
   min-width: 200px;
   border: 2px solid lime;
@@ -765,7 +767,7 @@ body::-webkit-scrollbar-thumb {
 #filter-data-section-skeleton {
   grid-area: filter-data-section-skeleton;
 
-  border-radius: 15px;
+  border-radius: 5px;
 
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 
@@ -783,7 +785,7 @@ body::-webkit-scrollbar-thumb {
   min-width: 200px;
   background-color: rgb(0 0 0 / 0.8);
   border: 2px solid lime;
-  border-radius: 15px;
+  border-radius: 5px;
   position: relative;
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.8);
 }
