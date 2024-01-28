@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 function ProfileSkeleton() {
   return (
+    // change the div soup from here and other sections
     <div className="Profile">
       <div id="grid-container-skeleton">
         <div id="greet-skeleton" className="shimmerBG"></div>
