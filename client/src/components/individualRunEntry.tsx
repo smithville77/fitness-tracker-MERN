@@ -1,8 +1,8 @@
 import React from "react";
 
 interface RunEntryProps {
-  onClick: (runData: any) => void; // Use the appropriate type for your runData
-  run: any; // Use the appropriate type for your run object
+  onClick: (runData: any) => void; 
+  run: any; 
 }
 
 const RunEntry: React.FC<RunEntryProps> = ({ onClick, run }) => {
