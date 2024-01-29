@@ -72,7 +72,7 @@ export function useAuth() {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh_token");
-    resetAuthState(); // Call the function to reset the state
+    resetAuthState(); 
     console.log("logged out");
   };
 
