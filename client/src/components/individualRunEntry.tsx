@@ -15,6 +15,10 @@ const RunEntry: React.FC<RunEntryProps> = ({ onClick, run }) => {
   return (
     <div className="run-entry" onClick={handleClick}>
       <div className="run-entry-top">
+        <div className="entry-top-emoji">
+          {speed >= 11.00 ? (<p data-tooltip-target="tooltip-dark">🔥</p>) : ("")}
+          {distance >= 4.00 ? (<p>🏃🏼‍♀️</p>) : ("")}
+        </div>
         {new Date(originalStartTime).toLocaleString("en-GB", {
           day: "numeric",
           month: "numeric",
