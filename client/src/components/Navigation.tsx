@@ -43,7 +43,7 @@ function Navigation() {
           >
             Run Data
           </Link>
-          <FitbitAuthButton />
+          {authenticated ? (<FitbitAuthButton />) : ("")}
           {authenticated ? (
             <a
               onClick={handleLogout}
