@@ -8,16 +8,6 @@ function Navigation() {
   const { authenticated, logout, setAuthenticated } = useAuth();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!authenticated) {
-  //     router.push('/');
-  //   }
-  // }, [authenticated, router]);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   setAuthenticated(!!token);
-  // }, [setAuthenticated]);
 
   const handleLogout = () => {
     logout();

@@ -137,14 +137,14 @@ function RunDisplayPage() {
                 </div>
                 <div id="bottom-filter">
                   <button
-                    className="border-solid border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600"
+                    className="border-solid bg-indigo-400 border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600 hover:text-white"
                     id="speed-sort"
                     onClick={filterBySpeedData}
                   >
                     Filter By Speed
                   </button>
                   <button
-                    className="border-solid border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600"
+                    className="border-solid bg-indigo-400 border-2 border-indigo-600 p-2 rounded m-2 hover:bg-indigo-600 hover:text-white"
                     id="distance-sort"
                     onClick={filterByDistance}
                   >
