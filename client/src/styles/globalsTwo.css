@@ -511,7 +511,7 @@ body::-webkit-scrollbar-thumb {
 }
 .entry-top-emoji {
   display: flex;
-  
+
 }
 .run-entry-bottom {
   display: flex;
@@ -527,23 +527,7 @@ body::-webkit-scrollbar-thumb {
   background-color: #3472f8;
   color: white;
 }
-/* #run-display-grid-container {
-  background-color: rgb(46, 46, 46);
-  overflow-y: scroll;
-  display:flex;
-  justify-content: center;
-  margin: 0 auto;
-  margin: 2rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-areas:
-    'run-display depth-sidebar'
-    'run-display depth-sidebar'
-    'run-display depth-sidebar';
-  width: 100%;
-  height: 80vh; 
-  overflow: hidden;
-} */
+
 
 #depth-sidebar {
   display: grid;
