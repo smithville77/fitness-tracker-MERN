@@ -1,12 +1,12 @@
 import React from "react";
 
 interface RunEntryProps {
-  onClick: (runData: any) => void; 
-  run: any; 
+  onClick: (runData: any) => void;
+  run: any;
 }
 
 const RunEntry: React.FC<RunEntryProps> = ({ onClick, run }) => {
-  const { originalStartTime, distance, speed } = run; 
+  const { originalStartTime, distance, speed } = run;
   const handleClick = () => {
     // Call the passed-in onClick handler with the entire run object
     onClick(run);
@@ -16,8 +16,8 @@ const RunEntry: React.FC<RunEntryProps> = ({ onClick, run }) => {
     <div className="run-entry" onClick={handleClick}>
       <div className="run-entry-top">
         <div className="entry-top-emoji">
-          {speed >= 11.00 ? (<p data-tooltip-target="tooltip-dark">🔥</p>) : ("")}
-          {distance >= 4.00 ? (<p>🏃🏼‍♀️</p>) : ("")}
+          {speed >= 11.0 ? <p data-tooltip-target="tooltip-dark">🔥</p> : ""}
+          {distance >= 4.0 ? <p>🏃🏼‍♀️</p> : ""}
         </div>
         {new Date(originalStartTime).toLocaleString("en-GB", {
           day: "numeric",
