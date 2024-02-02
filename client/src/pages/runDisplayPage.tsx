@@ -33,7 +33,7 @@ function RunDisplayPage() {
   console.log(token);
   useEffect(() => {
     if (token) {
-      // setToken(accessToken);
+     
 
       axios
         .get("http://localhost:3001/runDisplayPage", {
@@ -48,6 +48,8 @@ function RunDisplayPage() {
           // setTcxLink(response.data.runData[0].tcxLink)
           const tcxResponse = response.data.runData[0].tcxLink;
           const userId = response.data.userId;
+
+          // still needs a way to show the map data from the tcxLink
 
           // setTcxLink(tcxResponse + "?includePartialTCX=true")
           // Replace the '-/' in the TCX link with the actual user ID
