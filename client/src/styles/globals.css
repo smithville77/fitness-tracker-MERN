@@ -217,7 +217,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #recent-runs {
-
   display: flex;
   flex-direction: column;
   width: 100%;
