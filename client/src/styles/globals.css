@@ -224,8 +224,6 @@ body::-webkit-scrollbar-thumb {
   justify-content: center;
   align-items: center;
   color: white;
-
-  /* padding: 1.5rem; */
 }
 #recent-steps {
   display: flex;
@@ -235,8 +233,6 @@ body::-webkit-scrollbar-thumb {
   justify-content: center;
   align-items: center;
   color: white;
-
-  /* padding: 1.5rem; */
 }
 
 .graph-title {
@@ -244,10 +240,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 /*  */
-
-/* #daily-data{
-  
-} */
 
 #top-badges-container {
   display: grid;
@@ -290,11 +282,6 @@ body::-webkit-scrollbar-thumb {
   transition: 0.5s;
   transition-property: background, box-shadow;
 }
-
-/* .datetime:hover{
-  background: #2E94E3;
-  box-shadow: 0 0 30px #2E94E3;
-} */
 
 .date {
   font-size: 16px;
@@ -351,12 +338,11 @@ body::-webkit-scrollbar-thumb {
   padding: 2rem;
   display: flex;
   justify-content: space-between;
-  /* max-height: 100px; */
+
   width: auto;
   background-color: inherit;
   opacity: 0.6;
-  /* background-color: #84cc16; */
-  /* border:2px solid black */
+
   border-radius: 15px;
   border: 2px solid lime;
 }
@@ -373,11 +359,6 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
 }
-
-/* .inner-square > p {
-  padding: 1rem;
-  margin: 0 auto;
-} */
 
 #recent-data-skeleton {
   grid-area: recent-data-skeleton;
