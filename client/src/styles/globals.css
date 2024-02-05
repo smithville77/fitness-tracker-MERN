@@ -378,6 +378,7 @@ body::-webkit-scrollbar-thumb {
   color: white;
 }
 
+
 #outer-container-skeleton {
   display: flex;
   flex-direction: column;
